@@ -3,4 +3,16 @@
     justify-content: center;
     color: coral;
     font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.scene {
+    text-alighn: center;
+    width: 20rem;
+    height: 20rem;
+    margin: 0 auto;
+}
+
+.canvas {
+    background: white;
 }
