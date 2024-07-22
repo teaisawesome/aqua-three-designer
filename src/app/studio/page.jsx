@@ -5,6 +5,8 @@ import classes from './page.module.css'
 import Floor from '@/components/three-test/Floor'
 import LightBulb from '@/components/three-test/LightBulb'
 import Draggable from '@/components/three-test/Draggable'
+import { Suspense } from 'react'
+import Scene from '../../../public/3d-objects/air_plant_v1.0/Scene'
 
 export default function Studio() {
     return (
@@ -13,10 +15,9 @@ export default function Studio() {
             <div className={classes.scene}>
                 <Canvas shadows className={classes.canvas} camera={{position: [-6, 7, 7]}}>
                     <ambientLight color={"white"} intensity={0.3} />
-                    <LightBulb position={[0, 3, 0]}/>
-                    <Draggable>
-                        <Floor position={[0, -1, 0]}></Floor>
-                    </Draggable>
+                    <Suspense fallback={null}>
+                        <Scene/>
+                    </Suspense>
                 </Canvas>
             </div>
         </>
