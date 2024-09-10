@@ -8,11 +8,11 @@
 
 .scene {
     text-alighn: center;
-    width: 20rem;
+    width: 60%;
     height: 20rem;
     margin: 0 auto;
 }
 
 .canvas {
-    background: white;
+    background: gray;
 }

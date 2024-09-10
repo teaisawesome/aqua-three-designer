@@ -1,0 +1,12 @@
+{
+  "HomePage": {
+    "title": "Hello világ!"
+  },
+  "Navbar": {
+    "lang": {
+      "en": "Angol",
+      "hu": "Magyar"
+    },
+    "nav-create-new-layout": "Új akvárium létrehozása"
+  }
+}

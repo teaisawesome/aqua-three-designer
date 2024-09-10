@@ -1,0 +1,12 @@
+{
+  "HomePage": {
+    "title": "Hello world!"
+  },
+  "Navbar": {
+    "lang": {
+      "en": "English",
+      "hu": "Hungarian"
+    },
+    "nav-create-new-layout": "Create new layout"
+  }
+}
