@@ -15,7 +15,7 @@ const MainHeader = () => {
     return (
         <header>
             <nav className="bg-slate-500">
-                // TODO: need refactor -> md navbar should be separated from main div, same with sm logo and hamburger
+                // TODO: need refactor md navbar should be separated from main div, same with sm logo and hamburger
                 <div className="flex md:items-center md:justify-center bg-red-500 md:w-max md:mx-auto md:p-3 md:rounded-full">
                     <div className="hidden md:flex space-x-4">
                         <div className="flex items-center md:justify-center font-semibold self-center">
