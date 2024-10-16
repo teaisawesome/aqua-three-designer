@@ -2,7 +2,6 @@ import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 
 import MainHeader from "@/components/header/MainHeader";
-import NavbarTest from '@/components/header/NavbarTest';
 
 export default async function LocaleLayout({ children, params }) {
   const locale = params.locale || 'hu'
