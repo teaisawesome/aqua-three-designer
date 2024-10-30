@@ -18,7 +18,7 @@ const MainHeader = () => {
                 { 
                     // * medium-large device header
                 }
-                <div className="md:fixed md:top-5 md:left-1/3 flex md:items-center md:justify-center bg-sky-800 md:w-max md:mx-auto md:p-4 md:rounded-full drop-shadow-lg">
+                <div className="md:fixed md:top-5 md:left-1/3 flex md:items-center md:justify-center bg-sky-800 md:w-max md:mx-auto md:py-4 md:px-5 md:rounded-full drop-shadow-lg">
                     <div className="hidden md:flex space-x-4">
                         <div className="flex items-center md:mr-3 md:justify-center font-semibold self-center">
                             <span>Aqua<b className="text-cyan-500">3D</b>esigner</span>
