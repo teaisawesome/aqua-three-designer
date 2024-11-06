@@ -9,7 +9,7 @@ import { SimpleAquarium } from './models/aquariums/simple-aquarium/SimpleAquariu
 export default function MainCanvas() {
     return (
         <>
-            <div className={classes.scene}>
+            <div className="h-full">
                 <Canvas shadows className={classes.canvas} camera={{position: [0, 2, 10], fov: 50}}>
                     <OrbitControls
                         minAzimuthAngle={-Math.PI / 2}

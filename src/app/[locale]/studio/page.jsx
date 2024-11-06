@@ -1,11 +1,11 @@
 'use client'
 
-import MainCanvas  from '@/features/studio/components/MainCanvas.jsx'
+import StudioComponent  from '@/features/studio/components/StudioComponent.jsx'
 
 export default function Studio() {
     return (
         <>
-            <MainCanvas/>
+            <StudioComponent/>
         </>
     )
 }
