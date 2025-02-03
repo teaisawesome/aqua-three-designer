@@ -1,3 +1,5 @@
+'use client'
+
 import MainCanvas from "./MainCanvas"
 
 export default function StudioComponent(props) {
