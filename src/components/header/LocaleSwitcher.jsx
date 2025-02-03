@@ -1,15 +1,8 @@
 'use client'
 
-import React, { useTransition, onClick } from "react";
-import Select from 'react-select'
+import React, { useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-
-const options = [
-    { value: 'hu', label: 'Magyar', icon: '/country-flags/flag_of_hungary.svg' },
-    { value: 'en', label: 'English', icon: '/country-flags/flag_of_the_united_kingdom.svg' }
-];
 
 export default function LocalSwitcher({ className, ...props}) {
     const t = useTranslations('Navbar')
@@ -27,7 +20,7 @@ export default function LocalSwitcher({ className, ...props}) {
     return (
         <div className={className}>
             <button onClick={toggleLocale} className="text-cyan-500 font-semibold">
-                {localActive === 'hu' ? 'en' : 'hu'}
+                {localActive}
             </button>
         </div>
     )

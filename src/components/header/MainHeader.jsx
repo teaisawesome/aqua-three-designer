@@ -1,15 +1,14 @@
 'use client'
 
-import Link from 'next/link'
+import {Link} from '@/i18n/routing'
 import LocalSwitcher from './LocaleSwitcher'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faXmark, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { useTranslations } from "next-intl";
 
 
-const MainHeader = () => {
+const MainHeader = (props) => {
     const t = useTranslations('Navbar')
+    const {locale} = props
     const [menuVisible, setMenuVisible] = useState(false)
     
     return (
@@ -61,7 +60,7 @@ const MainHeader = () => {
                     </div>
                     {menuVisible && (
                         <div className="md:hidden mt-4 space-y-2 flex flex-col">
-                            <Link href="/studio">{t('nav-create-new-layout')}</Link>
+                            <Link href="/studio">Új akvárium létrehozása</Link>
                             <Link href="/studio">link 2</Link>
                         </div>
                     )}
