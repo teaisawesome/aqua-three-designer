@@ -5,17 +5,15 @@ import ToolBar from "./toolbar/Toolbar"
 
 export default function StudioComponent(props) {
     return (
-        <>
-            <div className="flex flex-row">
-                <div className="basis-1/6 bg-red-300">
-                    <h1>Toolbar</h1>
+        <div>
+            <div className="flex flex-col min-h-screen">
+                <header className={"bg-blue-500 text-white"}>Menüsáv</header>
+                <div className={"flex flex-1"}>
+                    <ToolBar></ToolBar>
+                    <MainCanvas />
                     <ToolBar></ToolBar>
                 </div>
-                <div className="basis-4/6 bg-blue-300 h-screen">
-                    <MainCanvas />
-                </div>
-                <div className="basis-1/6 bg-green-300">Properties</div>
             </div>
-        </>
+        </div>
     )
 }

@@ -20,7 +20,6 @@ export default async function LocaleLayout({ children, params }) {
     <html lang={locale} className="bg-sky-950">
       <body>
       <NextIntlClientProvider messages={messages}>
-          <MainHeader locale={locale}/>
           {children}
       </NextIntlClientProvider>
       </body>
