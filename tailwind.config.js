@@ -16,7 +16,7 @@ module.exports = {
       }
     },
     fontSize: {
-      'tile-size': '0.8rem'
+      'tile-size': '0.7rem'
     }
   },
   plugins: [],

@@ -1,16 +1,29 @@
 import Image from 'next/image'
+import {useState} from "react";
+import { Plus } from 'lucide-react'
 
 export default function Tile({className, ...props}) {
     const {title} = props
+    const [showAddSign, setShowAddSign] = useState(false)
 
-    return(
-        <div className={`${className} border-2 border-indigo-600 w-12 h-13`}>
+
+
+    return (
+        <div className={`${className} ${showAddSign ? "bg-amber-700" : "bg-sky-800"} relative rounded-md p-1 w-20 h-13 cursor-pointer`}
+             onMouseEnter={() => setShowAddSign(true)}
+             onMouseLeave={() => setShowAddSign(false)}
+             onClick={() => console.log(title)}
+        >
+            <div className={`absolute inset-0 flex items-center justify-center
+             bg-black/30 backdrop-blur-0 transition-opacity duration-300 ${showAddSign ? "opacity-100" : "opacity-0"}`}>
+                <Plus scale={20} className="text-white"/>
+            </div>
             <div>
                 <Image src='/img/anubias-barteli-tile-img.jpg' alt={title} width={200} height={200} style={{objectFit: "contain"}}/>
             </div>
-            <span className='text-tile-size'>
-                {title}
-            </span>
+            <div className={'text-center leading-none'}>
+                <span className='text-tile-size'>{title}</span>
+            </div>
         </div>
     )
 }
