@@ -5,6 +5,7 @@ import { OrbitControls } from '@react-three/drei'
 import classes from '../styles/studio.module.css'
 import { Suspense } from 'react'
 import { SimpleAquarium } from './models/aquariums/simple-aquarium/SimpleAquarium.jsx'
+import Cube from './models/plants/Cube'
 
 export default function MainCanvas() {
     return (
@@ -24,6 +25,9 @@ export default function MainCanvas() {
                     <Suspense fallback={null}>
                         <SimpleAquarium scale={0.1} position={[0, 0, 0]}/>
                     </Suspense>
+                    {
+                        // <Cube/>   ha az alkalmazásnál van egy click, akkor renderelődjön, adódjon hozzá a kocka
+                    }
                 </Canvas>
             </div>
         </>
