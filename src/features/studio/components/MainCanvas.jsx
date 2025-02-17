@@ -15,8 +15,10 @@ export default function MainCanvas() {
     return (
         <>
             <div className="flex-1 w-2/4">
-                <Canvas shadows className={classes.canvas} camera={{position: [0, 2, 10], fov: 50}}>
+                <Canvas shadows dpr={[1, 2]} className={classes.canvas} camera={{position: [0, 2, 10], fov: 50}}>
                     <OrbitControls
+                        enableDamping={true}
+                        dampingFactor={0.05}
                         minAzimuthAngle={-Math.PI / 2}
                         maxAzimuthAngle={Math.PI / 2}
                         minPolarAngle={Math.PI / 6}
@@ -25,8 +27,14 @@ export default function MainCanvas() {
                         maxDistance={10}
                     />
                     <ambientLight intensity={0.5} />
-                    <directionalLight position={[5, 10, 5]} intensity={0.7} castShadow />
-                    <Suspense fallback={null}>
+                    <directionalLight
+                        position={[5, 10, 5]}
+                        intensity={0.7}
+                        castShadow
+                        shadow-mapSize-width={1024}
+                        shadow-mapSize-height={1024}
+                    />
+                    <Suspense fallback={<div>Loading...</div>}>
                         <SimpleAquarium scale={0.1} position={[0, 0, 0]}/>
                     </Suspense>
                     <Selection>
