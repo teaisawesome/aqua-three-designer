@@ -9,14 +9,23 @@ export default function Tile({className, ...props}) {
         state.addUsedComponent)
     const {title} = props
     const [showAddSign, setShowAddSign] = useState(false)
+    const [xPosition, setXPosition] = useState(0)
 
     function addPlant(){
-        addUsedComponent(title)
-
-        console.log("used: ", usedComponents)
+        console.log('X:', xPosition)
+        addUsedComponent({
+            componentId: 'cube',
+            scale: 0.5,
+            position: {
+                x: xPosition,
+                y: 0,
+                z: 0
+            }
+        })
     }
 
     return (
+        <>
         <div className={`${className} ${showAddSign ? "bg-amber-700" : "bg-sky-800"} relative rounded-md p-1 w-20 h-13 cursor-pointer`}
              onMouseEnter={() => setShowAddSign(true)}
              onMouseLeave={() => setShowAddSign(false)}
@@ -33,5 +42,7 @@ export default function Tile({className, ...props}) {
                 <span className='text-tile-size'>{title}</span>
             </div>
         </div>
+        <input className={'text-black'} type="text" value={xPosition} id='xPosition' onChange={e => setXPosition(+(e.target.value))}/>
+        </>
     )
 }

@@ -3,11 +3,15 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import classes from '../styles/studio.module.css'
-import { Suspense } from 'react'
+import {Suspense, useState, useRef, useEffect} from 'react'
 import { SimpleAquarium } from './models/aquariums/simple-aquarium/SimpleAquarium.jsx'
 import Cube from './models/plants/Cube'
+import useStudioStore from "@/features/studio/stores/useStudioStore";
+import {EffectComposer, Outline, Selection, Select} from "@react-three/postprocessing";
 
 export default function MainCanvas() {
+    const usedComponents = useStudioStore((state) => state.usedComponents)
+
     return (
         <>
             <div className="flex-1 w-2/4">
@@ -25,9 +29,30 @@ export default function MainCanvas() {
                     <Suspense fallback={null}>
                         <SimpleAquarium scale={0.1} position={[0, 0, 0]}/>
                     </Suspense>
-                    {
-                        // <Cube/>   ha az alkalmazásnál van egy click, akkor renderelődjön, adódjon hozzá a kocka
-                    }
+                    <Selection>
+                        <EffectComposer autoClear={false}>
+                            <Outline
+                                visibleEdgeColor='white'
+                                hiddenEdgeColor='black'
+                                edgeStrength={5}
+                                blur={false}
+                            />
+                        </EffectComposer>
+                        {
+                            usedComponents.map((component, index) => {
+                                switch (component.componentId) {
+                                    case 'cube':
+                                        return <Cube
+                                                    key={index}
+                                                    scale={component.scale}
+                                                    position={[component.position.x, component.position.y, component.position.z]}
+                                                    id={index + 1}
+                                        />;
+                                    default: return null;
+                                }
+                            })
+                        }
+                    </Selection>
                 </Canvas>
             </div>
         </>
