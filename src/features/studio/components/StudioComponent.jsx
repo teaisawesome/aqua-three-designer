@@ -2,6 +2,7 @@
 
 import MainCanvas from "./MainCanvas"
 import ToolBar from "./toolbar/Toolbar"
+import PreferenceBar from "@/features/studio/components/preferencebar/PreferenceBar";
 
 export default function StudioComponent(props) {
     return (
@@ -11,7 +12,7 @@ export default function StudioComponent(props) {
                 <div className={"flex flex-1"}>
                     <ToolBar></ToolBar>
                     <MainCanvas />
-                    <ToolBar></ToolBar>
+                    <PreferenceBar />
                 </div>
             </div>
         </div>
