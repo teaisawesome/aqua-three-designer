@@ -14,10 +14,8 @@ export default async function LocaleLayout({ children, params }) {
 
   const messages = await getMessages();
 
-  console.log('MESSAGES', messages);
-
   return (
-    <html lang={locale} className="bg-sky-950">
+    <html lang={locale} className="bg-gradient-to-r from-sky-500 to-indigo-500">
       <body>
       <NextIntlClientProvider messages={messages}>
           {children}
