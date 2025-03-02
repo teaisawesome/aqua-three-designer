@@ -6,6 +6,7 @@ const useStudioStore = create(
         (set) => ({
             usedComponents: [],
             highlightedObjectId: 0,
+            index: 1,
             addUsedComponent: (title) =>
                 set((state) => ({
                     usedComponents: [...state.usedComponents, title],
@@ -13,7 +14,12 @@ const useStudioStore = create(
             addHighlightedObjectId: (id) =>
                 set((state) => ({
                     highlightedObjectId: id
+                })),
+            incrementIndex: () =>
+                set((state) => ({
+                    index: state.index + 1
                 }))
+
         }),
         {
             name: 'studio-storage',

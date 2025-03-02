@@ -1,14 +1,13 @@
+import SceneHierarchy from "@/features/studio/components/preferencebar/scenehierarchy/SceneHierarchy";
+
 export default function PreferenceBar() {
     return (
-        <aside className={"flex flex-row rounded-2xl shadow-lg m-3 md:block w-1/6 border border-white/30 text-center"}>
-            <div className={"h-72 w-full bg-amber-700/30 backdrop-blur-md rounded-t-2xl scrollbar scrollbar-thumb-sky-700 scrollbar-track-sky-300 overflow-y-scroll"}>
-                <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et neque lobortis ex finibus laoreet. Maecenas eget commodo lectus, pretium congue urna. Sed a nulla euismod, efficitur diam quis, ultrices mauris. Vestibulum laoreet eleifend nisi, a pulvinar est sagittis et. Quisque malesuada iaculis mauris in volutpat. In in pellentesque massa. Fusce vitae dui gravida, blandit quam ut, posuere augue. Sed erat dui, pretium eu odio vitae, posuere egestas lorem. Suspendisse maximus venenatis nisl, sit amet vehicula magna hendrerit id. Sed est sem, mollis at maximus eget, venenatis convallis nibh. Aliquam porttitor sapien dui, nec maximus justo lacinia eget. Phasellus congue, diam nec luctus porta, felis sapien sagittis metus, vel feugiat nisi ipsum a velit. Proin scelerisque fermentum dignissim. Sed maximus ultrices consequat. Nulla et dolor nec sapien ultrices fringilla. Donec eu nunc ut tellus lobortis vehicula.
-
-                    Duis ullamcorper suscipit risus, vel porta sapien dignissim at. Etiam tempor dapibus mi, eget dignissim augue dignissim eu. Curabitur sed nisl at ligula aliquet tincidunt eu non ante. Etiam ipsum est, pretium sit amet tortor ac, aliquam hendrerit ex. Praesent a risus orci. Duis nec dui et dolor lacinia imperdiet. Morbi quis elit ipsum. Curabitur sem arcu, euismod vitae vulputate in, gravida tincidunt lectus. Nam venenatis, tortor sed dictum volutpat, tortor lacus facilisis est, sed malesuada arcu enim vitae metus. Aenean ut enim sit amet arcu rhoncus molestie. Nam vitae augue euismod, laoreet neque quis, hendrerit ipsum. Nunc quis dapibus arcu. Etiam sagittis felis mauris, quis vulputate turpis dapibus in.
-
-                    Mauris id ligula et nisl tristique elementum eget a justo. Donec sit amet lacus vestibulum, posuere mauris vel, dignissim metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean et molestie odio. Maecenas tempus pulvinar nisl nec lobortis. Suspendisse malesuada non ipsum a blandit. Proin ultricies velit ex, quis semper nisi condimentum quis. Curabitur consectetur ullamcorper dolor. Nullam vitae sapien venenatis, consequat sapien nec, venenatis erat. Proin nec efficitur lectus, id ultrices ex. In sapien dui, sollicitudin ac pellentesque non, congue sed ipsum. Morbi tempus, eros ac viverra ultricies, turpis metus mattis tortor, ut tincidunt dui ligula maximus leo. Nunc ultrices quam ut erat consectetur, non laoreet felis posuere. Sed vel tristique massa.</h1>
+        <aside className={"flex flex-col w-1/6 rounded-2xl shadow-lg m-3 md:block border border-white/30 text-center"}>
+            <div className={"h-1/2 w-full bg-sky-800 backdrop-blur-md rounded-t-2xl"}>
+                <SceneHierarchy />
             </div>
-            <div className={"h-72 w-full bg-amber-200"}>
+            <div className={"h-1/2 w-full bg-amber-200"}>
+                <h1>asd overflow-y-scroll</h1>
             </div>
         </aside>
     )
