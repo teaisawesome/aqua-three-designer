@@ -2,19 +2,27 @@ import Image from 'next/image'
 import {useState} from "react";
 import { Plus } from 'lucide-react'
 import useStudioStore from "@/features/studio/stores/useStudioStore";
+import {generateUUID} from "three/src/math/MathUtils";
 
 export default function Tile({className, ...props}) {
     const usedComponents = useStudioStore((state) => state.usedComponents)
+    const index = useStudioStore((state) => state.index)
     const addUsedComponent = useStudioStore((state) =>
         state.addUsedComponent)
+    const incrementIndex = useStudioStore((state) => state.incrementIndex)
+
     const {title} = props
     const [showAddSign, setShowAddSign] = useState(false)
-    const [xPosition, setXPosition] = useState(0)
+    const [xPosition, setXPosition] = useState(1)
 
     function addPlant(){
-        console.log('X:', xPosition)
+        const currentIndexString = index.toString()
+        const uniqueId = generateUUID()
+
         addUsedComponent({
+            id: uniqueId,
             componentId: 'cube',
+            displayName: currentIndexString.padStart(3, '0') + '_cube',
             scale: 0.5,
             position: {
                 x: xPosition,
@@ -22,6 +30,8 @@ export default function Tile({className, ...props}) {
                 z: 0
             }
         })
+
+        incrementIndex()
     }
 
     return (

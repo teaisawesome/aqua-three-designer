@@ -54,7 +54,7 @@ export default function MainCanvas() {
                                                     key={index}
                                                     scale={component.scale}
                                                     position={[component.position.x, component.position.y, component.position.z]}
-                                                    id={index + 1}
+                                                    id={component.id}
                                         />;
                                     default: return null;
                                 }

@@ -7,11 +7,14 @@ export default function Cube({ scale, position, id }) {
     const addHighlightedObjectId = useStudioStore((state) => state.addHighlightedObjectId)
 
     const handleHighlight = (id) => {
+        if(highlightedObjectId === id) {
+            addHighlightedObjectId(null)
+            return
+        }
         addHighlightedObjectId(id)
     }
 
     const isEnabled = () => {
-        console.log(`highlightedObjectId: ${highlightedObjectId}, id: ${id}`)
         return highlightedObjectId === id
     }
 
