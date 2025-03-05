@@ -2,11 +2,13 @@ import {useRef, useState} from "react";
 import {Select} from "@react-three/postprocessing";
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 
-export default function Cube({ scale, position, id }) {
+export default function Cube({ scale, position, id, locked }) {
     const highlightedObjectId = useStudioStore((state) => state.highlightedObjectId)
     const addHighlightedObjectId = useStudioStore((state) => state.addHighlightedObjectId)
 
     const handleHighlight = (id) => {
+        if(locked) return
+
         if(highlightedObjectId === id) {
             addHighlightedObjectId(null)
             return

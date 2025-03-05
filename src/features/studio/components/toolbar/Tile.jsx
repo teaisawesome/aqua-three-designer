@@ -23,6 +23,7 @@ export default function Tile({className, ...props}) {
             id: uniqueId,
             componentId: 'cube',
             displayName: currentIndexString.padStart(3, '0') + '_cube',
+            locked: false,
             scale: 0.5,
             position: {
                 x: xPosition,

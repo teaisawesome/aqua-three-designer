@@ -18,8 +18,15 @@ const useStudioStore = create(
             incrementIndex: () =>
                 set((state) => ({
                     index: state.index + 1
-                }))
-
+                })),
+            toggleLockOnComponent: (componentId) =>
+                set((state) => ({
+                    usedComponents: state.usedComponents.map((component) =>
+                        component.id === componentId
+                            ? { ...component, locked: !component.locked }
+                            : component
+                    ),
+                })),
         }),
         {
             name: 'studio-storage',

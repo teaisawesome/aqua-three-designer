@@ -55,6 +55,7 @@ export default function MainCanvas() {
                                                     scale={component.scale}
                                                     position={[component.position.x, component.position.y, component.position.z]}
                                                     id={component.id}
+                                                    locked={component.locked}
                                         />;
                                     default: return null;
                                 }
