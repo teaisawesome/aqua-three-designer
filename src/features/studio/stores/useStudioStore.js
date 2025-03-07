@@ -6,6 +6,7 @@ const useStudioStore = create(
         (set) => ({
             usedComponents: [],
             highlightedObjectId: 0,
+            selectedObject: null,
             index: 1,
             addUsedComponent: (title) =>
                 set((state) => ({
@@ -26,6 +27,18 @@ const useStudioStore = create(
                             ? { ...component, locked: !component.locked }
                             : component
                     ),
+                })),
+            setSelectedObject: (object) =>
+                set((state) => ({
+                    selectedObject: object
+                })),
+            setSelectedObjectInUsedComponent: (componentId, objectRef) =>
+                set((state) => ({
+                    usedComponents: state.usedComponents.map((component) =>
+                        component.id === componentId
+                            ? { ...component, objectReference: objectRef}
+                            : component
+                    )
                 })),
         }),
         {

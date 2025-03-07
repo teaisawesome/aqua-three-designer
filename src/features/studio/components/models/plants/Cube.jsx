@@ -1,19 +1,32 @@
-import {useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 import {Select} from "@react-three/postprocessing";
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 
-export default function Cube({ scale, position, id, locked }) {
+export default function Cube(props) {
+    const { id, position, scale, locked } = props
+    const meshRef = useRef(null)
     const highlightedObjectId = useStudioStore((state) => state.highlightedObjectId)
     const addHighlightedObjectId = useStudioStore((state) => state.addHighlightedObjectId)
+    const setSelectedObjectInUsedComponent = useStudioStore((state) => state.setSelectedObjectInUsedComponent)
+    const setSelectedObject = useStudioStore((state) => state.setSelectedObject)
 
-    const handleHighlight = (id) => {
+    useEffect(() => {
+        if(meshRef.current) {
+            setSelectedObjectInUsedComponent(id, meshRef.current)
+        }
+    })
+
+    const handleHighlight = (id, e) => {
         if(locked) return
 
         if(highlightedObjectId === id) {
             addHighlightedObjectId(null)
+            setSelectedObject(null)
             return
         }
+
         addHighlightedObjectId(id)
+        setSelectedObject(meshRef.current)
     }
 
     const isEnabled = () => {
@@ -23,10 +36,11 @@ export default function Cube({ scale, position, id, locked }) {
     return (
         <Select enabled={isEnabled()}>
             <mesh
+                ref={meshRef}
                 position={position}
                 scale={scale}
                 rotation={[0, 10, 0]}
-                onClick={() => handleHighlight(id)}
+                onClick={(e) => handleHighlight(id)}
             >
                 <boxGeometry attach="geometry" args={[1, 1, 1]} />
                 <meshStandardMaterial attach="material" color="#6be092" />

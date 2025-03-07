@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, TransformControls } from '@react-three/drei'
 import classes from '../styles/studio.module.css'
 import {Suspense, useState, useRef, useEffect} from 'react'
 import { SimpleAquarium } from './models/aquariums/simple-aquarium/SimpleAquarium.jsx'
@@ -11,12 +11,16 @@ import {EffectComposer, Outline, Selection, Select} from "@react-three/postproce
 
 export default function MainCanvas() {
     const usedComponents = useStudioStore((state) => state.usedComponents)
+    const selectedObject = useStudioStore((state) => state.selectedObject)
+    const transformRef = useRef(null)
+    const orbitControlRef = useRef(null)
 
     return (
         <>
             <div className="flex-1 w-2/4">
                 <Canvas shadows dpr={[1, 2]} className={classes.canvas} camera={{position: [0, 2, 10], fov: 50}}>
                     <OrbitControls
+                        ref={orbitControlRef}
                         enableDamping={true}
                         dampingFactor={0.05}
                         minAzimuthAngle={-Math.PI / 2}
@@ -26,6 +30,15 @@ export default function MainCanvas() {
                         minDistance={2}
                         maxDistance={10}
                     />
+                    {selectedObject && (
+                        <TransformControls
+                            ref={transformRef}
+                            object={selectedObject}
+                            mode="translate"
+                            onMouseDown={() => orbitControlRef.current.enableRotate = false}
+                            onMouseUp={() => orbitControlRef.current.enableRotate = true}
+                        />
+                    )}
                     <ambientLight intensity={0.5} />
                     <directionalLight
                         position={[5, 10, 5]}
@@ -48,6 +61,7 @@ export default function MainCanvas() {
                         </EffectComposer>
                         {
                             usedComponents.map((component, index) => {
+
                                 switch (component.componentId) {
                                     case 'cube':
                                         return <Cube
