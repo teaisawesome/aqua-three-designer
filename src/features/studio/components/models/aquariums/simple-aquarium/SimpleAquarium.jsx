@@ -20,30 +20,30 @@ export function SimpleAquarium(props) {
     }, [nodes])
 
     useFrame(() => {
-       if(dragging && pivot.current) {
+        if(dragging && pivot.current) {
             // {isEuler: true, _x: 0, _y: 0, _z: 0, _order: 'XYZ', …}
 
-            // pivot.current.rotation.y += 0.01
-       }
+            //pivot.current.rotation.y += 0.01
+        }
     })
 
     const handleMouseDown = (event) => {
         setDragging(true)
         const deltaX = event.clientX - position.x
         setPosition({x: event.clientX, y: event.clientY, deltaX})
-        console.log("MOUSE DOWN")
+        //console.log("MOUSE DOWN")
     }
 
     const handleMouseUp = (event) => {
         setDragging(false)
-        console.log("MOUSE UP")
+        //console.log("MOUSE UP")
     }
 
     const handleMouseMove = (event) => {
         if(dragging) {
             const deltaX = event.clientX - position.x
             setPosition({x: event.clientX, y: event.clientY, deltaX})
-            console.log(position)
+            //console.log(position)
         }
     }
 
