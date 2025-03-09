@@ -20,6 +20,7 @@ export default function SceneItem({item}) {
         toggleLockOnComponent(id)
         if (highlightedObjectId === id) {
             addHighlightedObjectId(null)
+            setSelectedObject(null)
         }
     }
 
