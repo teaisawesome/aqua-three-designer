@@ -8,6 +8,7 @@ const useStudioStore = create(
             highlightedObjectId: 0,
             selectedObject: null,
             index: 1,
+            transformControlMode: 'translate',
             addUsedComponent: (title) =>
                 set((state) => ({
                     usedComponents: [...state.usedComponents, title],
@@ -39,6 +40,10 @@ const useStudioStore = create(
                             ? { ...component, objectReference: objectRef}
                             : component
                     )
+                })),
+            setTransformControlMode: (mode) =>
+                set((state) => ({
+                    transformControlMode: mode
                 })),
         }),
         {

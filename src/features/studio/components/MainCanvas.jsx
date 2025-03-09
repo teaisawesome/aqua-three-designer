@@ -8,16 +8,19 @@ import { SimpleAquarium } from './models/aquariums/simple-aquarium/SimpleAquariu
 import Cube from './models/plants/Cube'
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 import {EffectComposer, Outline, Selection, Select} from "@react-three/postprocessing";
+import { Move3d, Rotate3d, Scale3d, Info } from 'lucide-react'
 
 export default function MainCanvas() {
     const usedComponents = useStudioStore((state) => state.usedComponents)
     const selectedObject = useStudioStore((state) => state.selectedObject)
     const transformRef = useRef(null)
     const orbitControlRef = useRef(null)
+    const transformControlMode = useStudioStore((state) => state.transformControlMode)
+    const setTransformControlMode = useStudioStore((state) => state.setTransformControlMode)
 
     return (
         <>
-            <div className="flex-1 w-2/4">
+            <div className="flex-1 w-2/4 relative">
                 <Canvas shadows dpr={[1, 2]} className={classes.canvas} camera={{position: [0, 2, 10], fov: 50}}>
                     <OrbitControls
                         ref={orbitControlRef}
@@ -34,7 +37,7 @@ export default function MainCanvas() {
                         <TransformControls
                             ref={transformRef}
                             object={selectedObject}
-                            mode="translate"
+                            mode={transformControlMode}
                             onMouseDown={() => orbitControlRef.current.enableRotate = false}
                             onMouseUp={() => orbitControlRef.current.enableRotate = true}
                         />
@@ -77,6 +80,27 @@ export default function MainCanvas() {
                         }
                     </Selection>
                 </Canvas>
+                {{
+                    // ! SHOULD BE REFACTORED INTO A SEPARATE JSX COMPONENT
+                }}
+                <div className={'absolute top-4 right-4'}>
+                    <div className={'bg-sky-800 rounded-xl p-3.5 flex flex-col gap-4'}>
+                        <Move3d className={`${transformControlMode === 'translate' ? 'text-yellow-500 scale-125' : 'hover:text-green-500'} transition duration-300 hover:ease-in-out hover:scale-125 cursor-pointer`}
+                                onClick={() => setTransformControlMode('translate')}/>
+                        <Rotate3d className={`${transformControlMode === 'rotate' ? 'text-yellow-500 scale-125' : 'hover:text-green-500'} transition duration-300 hover:ease-in-out hover:scale-125 cursor-pointer`}
+                                  onClick={() => setTransformControlMode('rotate')}/>
+                        <Scale3d className={`${transformControlMode === 'scale' ? 'text-yellow-500 scale-125' : 'hover:text-green-500'} transition duration-300 hover:ease-in-out hover:scale-125 cursor-pointer`}
+                                 onClick={() => setTransformControlMode('scale')}/>
+                    </div>
+                </div>
+                {{
+                    // ! SHOULD BE REFACTORED INTO A SEPARATE JSX COMPONENT
+                }}
+                <div className={'absolute top-4 left-4'}>
+                    <div className={'bg-sky-800 rounded-xl p-3 flex flex-row gap-4'}>
+                        <Info/> Még nem csinál semmit
+                    </div>
+                </div>
             </div>
         </>
     )
