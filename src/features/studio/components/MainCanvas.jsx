@@ -8,7 +8,8 @@ import { SimpleAquarium } from './models/aquariums/simple-aquarium/SimpleAquariu
 import Cube from './models/plants/Cube'
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 import {EffectComposer, Outline, Selection, Select} from "@react-three/postprocessing";
-import { Move3d, Rotate3d, Scale3d, Info } from 'lucide-react'
+import TransformControlModeSelector from "@/features/studio/components/canvas-tools/TransformControlModeSelector";
+import InfoPanel from "@/features/studio/components/canvas-tools/InfoPanel";
 
 export default function MainCanvas() {
     const usedComponents = useStudioStore((state) => state.usedComponents)
@@ -16,7 +17,6 @@ export default function MainCanvas() {
     const transformRef = useRef(null)
     const orbitControlRef = useRef(null)
     const transformControlMode = useStudioStore((state) => state.transformControlMode)
-    const setTransformControlMode = useStudioStore((state) => state.setTransformControlMode)
 
     return (
         <>
@@ -80,27 +80,8 @@ export default function MainCanvas() {
                         }
                     </Selection>
                 </Canvas>
-                {{
-                    // ! SHOULD BE REFACTORED INTO A SEPARATE JSX COMPONENT
-                }}
-                <div className={'absolute top-4 right-4'}>
-                    <div className={'bg-sky-800 rounded-xl p-3.5 flex flex-col gap-4'}>
-                        <Move3d className={`${transformControlMode === 'translate' ? 'text-yellow-500 scale-125' : 'hover:text-green-500'} transition duration-300 hover:ease-in-out hover:scale-125 cursor-pointer`}
-                                onClick={() => setTransformControlMode('translate')}/>
-                        <Rotate3d className={`${transformControlMode === 'rotate' ? 'text-yellow-500 scale-125' : 'hover:text-green-500'} transition duration-300 hover:ease-in-out hover:scale-125 cursor-pointer`}
-                                  onClick={() => setTransformControlMode('rotate')}/>
-                        <Scale3d className={`${transformControlMode === 'scale' ? 'text-yellow-500 scale-125' : 'hover:text-green-500'} transition duration-300 hover:ease-in-out hover:scale-125 cursor-pointer`}
-                                 onClick={() => setTransformControlMode('scale')}/>
-                    </div>
-                </div>
-                {{
-                    // ! SHOULD BE REFACTORED INTO A SEPARATE JSX COMPONENT
-                }}
-                <div className={'absolute top-4 left-4'}>
-                    <div className={'bg-sky-800 rounded-xl p-3 flex flex-row gap-4'}>
-                        <Info/> Még nem csinál semmit
-                    </div>
-                </div>
+                <TransformControlModeSelector/>
+                <InfoPanel/>
             </div>
         </>
     )
