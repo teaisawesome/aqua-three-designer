@@ -17,6 +17,16 @@ export default function MainCanvas() {
     const transformRef = useRef(null)
     const orbitControlRef = useRef(null)
     const transformControlMode = useStudioStore((state) => state.transformControlMode)
+    const highlightedObjectId = useStudioStore((state) => state.highlightedObjectId)
+    const setSelectedObjectPosition = useStudioStore((state) => state.setSelectedObjectPosition)
+
+    const handlePositionChange = () => {
+        if(highlightedObjectId && selectedObject) {
+            setSelectedObjectPosition(highlightedObjectId, 'x', selectedObject.position.x)
+            setSelectedObjectPosition(highlightedObjectId, 'y', selectedObject.position.y)
+            setSelectedObjectPosition(highlightedObjectId, 'z', selectedObject.position.z)
+        }
+    }
 
     return (
         <>
@@ -40,6 +50,7 @@ export default function MainCanvas() {
                             mode={transformControlMode}
                             onMouseDown={() => orbitControlRef.current.enableRotate = false}
                             onMouseUp={() => orbitControlRef.current.enableRotate = true}
+                            onObjectChange={() => handlePositionChange()}
                         />
                     )}
                     <ambientLight intensity={0.5} />
