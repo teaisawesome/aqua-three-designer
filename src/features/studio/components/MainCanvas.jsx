@@ -18,13 +18,21 @@ export default function MainCanvas() {
     const orbitControlRef = useRef(null)
     const transformControlMode = useStudioStore((state) => state.transformControlMode)
     const highlightedObjectId = useStudioStore((state) => state.highlightedObjectId)
-    const setSelectedObjectPosition = useStudioStore((state) => state.setSelectedObjectPosition)
+    const setSelectedObjectTransform = useStudioStore((state) => state.setSelectedObjectTransform)
 
     const handlePositionChange = () => {
         if(highlightedObjectId && selectedObject) {
-            setSelectedObjectPosition(highlightedObjectId, 'x', selectedObject.position.x)
-            setSelectedObjectPosition(highlightedObjectId, 'y', selectedObject.position.y)
-            setSelectedObjectPosition(highlightedObjectId, 'z', selectedObject.position.z)
+            setSelectedObjectTransform(highlightedObjectId, 'position','x', selectedObject.position.x)
+            setSelectedObjectTransform(highlightedObjectId, 'position','y', selectedObject.position.y)
+            setSelectedObjectTransform(highlightedObjectId, 'position','z', selectedObject.position.z)
+
+            setSelectedObjectTransform(highlightedObjectId, 'rotation','x', selectedObject.rotation.x)
+            setSelectedObjectTransform(highlightedObjectId, 'rotation','y', selectedObject.rotation.y)
+            setSelectedObjectTransform(highlightedObjectId, 'rotation','z', selectedObject.rotation.z)
+
+            setSelectedObjectTransform(highlightedObjectId, 'scale','x', selectedObject.scale.x)
+            setSelectedObjectTransform(highlightedObjectId, 'scale','y', selectedObject.scale.y)
+            setSelectedObjectTransform(highlightedObjectId, 'scale','z', selectedObject.scale.z)
         }
     }
 
@@ -80,8 +88,9 @@ export default function MainCanvas() {
                                     case 'cube':
                                         return <Cube
                                                     key={index}
-                                                    scale={component.scale}
                                                     position={[component.position.x, component.position.y, component.position.z]}
+                                                    rotation={[component.rotation.x, component.rotation.y, component.rotation.z]}
+                                                    scale={[component.scale.x, component.scale.y, component.scale.z]}
                                                     id={component.id}
                                                     locked={component.locked}
                                         />;

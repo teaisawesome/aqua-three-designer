@@ -3,7 +3,7 @@ import {Select} from "@react-three/postprocessing";
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 
 export default function Cube(props) {
-    const { id, position, scale, locked } = props
+    const { id, position, rotation, scale, locked } = props
     const meshRef = useRef(null)
     const highlightedObjectId = useStudioStore((state) => state.highlightedObjectId)
     const addHighlightedObjectId = useStudioStore((state) => state.addHighlightedObjectId)
@@ -38,8 +38,8 @@ export default function Cube(props) {
             <mesh
                 ref={meshRef}
                 position={position}
+                rotation={rotation}
                 scale={scale}
-                rotation={[0, 10, 0]}
                 onClick={(e) => handleHighlight(id)}
             >
                 <boxGeometry attach="geometry" args={[1, 1, 1]} />

@@ -24,12 +24,9 @@ export default function Tile({className, ...props}) {
             componentId: 'cube',
             displayName: currentIndexString.padStart(3, '0') + '_cube',
             locked: false,
-            scale: 0.5,
-            position: {
-                x: xPosition,
-                y: 0,
-                z: 0
-            }
+            position: { x: xPosition, y: 0, z: 0 },
+            rotation: { x: 0, y: 0, z: 0 },
+            scale: { x: 1, y: 1, z: 1 }
         })
 
         incrementIndex()
