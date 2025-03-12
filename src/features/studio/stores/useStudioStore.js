@@ -42,21 +42,27 @@ const useStudioStore = create((set) => ({
         set((state) => ({
             transformControlMode: mode
         })),
-    setSelectedObjectPosition: (componentId, position, value) =>
+    setSelectedObjectTransform: (componentId, transformType, coordinateType, value) =>
         set((state) => ({
             usedComponents: state.usedComponents.map((component) => {
                 if (component.id === componentId) {
-                    const currentPosition = component.position || { x: 0, y: 0, z: 0 };
+                    if(!['position','rotation', 'scale'].includes(transformType)) {
+                        console.error("Invalid transform type");
+                        return component
+                    }
+
+                    const currentPosition = component[transformType] || { x: 0, y: 0, z: 0 }
+
                     return {
                         ...component,
-                        position: {
-                            x: position === 'x' ? value : currentPosition.x,
-                            y: position === 'y' ? value : currentPosition.y,
-                            z: position === 'z' ? value : currentPosition.z,
+                        [transformType]: {
+                            x: coordinateType === 'x' ? value : currentPosition.x,
+                            y: coordinateType === 'y' ? value : currentPosition.y,
+                            z: coordinateType === 'z' ? value : currentPosition.z,
                         },
-                    };
+                    }
                 }
-                return component;
+                return component
             })
         }))
 }));
