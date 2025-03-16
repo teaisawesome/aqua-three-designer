@@ -1,14 +1,17 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
+import connectToDatabase from "@/app/_lib/db/mongoose";
+import {User} from "@/app/_lib/models/User";
+import bcrypt from "bcryptjs";
 
 export const options = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                username: {
-                    label: "Username:",
-                    type: "text",
-                    placeholder: "your-cool-username"
+                email: {
+                    label: "Email:",
+                    type: "email",
+                    placeholder: "your-cool-email"
                 },
                 password: {
                     label: "Password:",
@@ -17,10 +20,16 @@ export const options = {
                 }
             },
             async authorize(credentials) {
-                const user = { id: "42", name: "asd", password: "123" }
+                await connectToDatabase()
 
-                if (credentials?.username === user.name && credentials?.password === user.password) {
-                    return { id: user.id, name: user.name };
+                const user = await User.findOne({ email: credentials.email })
+
+                if(!user) return null
+
+                const isValid = await bcrypt.compare(credentials.password, user.password)
+
+                if(credentials?.email === user.email && isValid) {
+                    return { id: user._id.toString(), name: user.name, email: user.email };
                 } else {
                     return null
                 }
@@ -33,12 +42,18 @@ export const options = {
         updateAge: 24 * 60 * 60 // Naponta frissíti a JWT-t
     },
     callbacks: {
-        async jwt({ token }) {
-            console.log("JWT token: ", token)
-            return token;
+        async jwt({ token, user }) {
+            if(user) {
+                token.id = user.id
+                token.name = user.name
+                token.email = user.email
+            }
+            return token
         },
         async session({ session, token }) {
-            console.log("Session: ", session)
+            session.user.id = token.id
+            session.user.name = token.name
+            session.user.email = token.email
             return session
         }
     },
