@@ -8,7 +8,6 @@ export default function StudioComponent(props) {
     return (
         <div>
             <div className="flex flex-col h-screen">
-                <header className={"bg-blue-500 text-white"}>Menüsáv</header>
                 <div className={"flex flex-1"}>
                     <ToolBar></ToolBar>
                     <MainCanvas />
