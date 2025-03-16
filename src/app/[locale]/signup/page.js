@@ -26,15 +26,18 @@ export default function Signup({ params }) {
 
         const result = await signup(form);
 
+        console.log("RES", result);
+
         if (!result.success) {
             setErrors({
                 name: result.error.name?._errors[0] || "",
                 email: result.error.email?._errors[0] || "",
                 password: result.error.password?._errors[0] || "",
+                messages: result.error.messages?._errors[0] || "",
             });
         } else {
             setErrors({})
-            setFormData({ name: "", email: "", password: "" })
+            setFormData({ name: "", email: "", password: "", messages: "" })
         }
     };
 
@@ -75,6 +78,7 @@ export default function Signup({ params }) {
                     />
                     {errors.password && <p className="text-red-500">{errors.password}</p>}
                 </div>
+                {errors.messages && <p className="text-red-500">{errors.messages}</p>}
                 <button type="submit" className={"bg-sky-500 w-1/2 py-2 mt-2 rounded-md cursor-pointer"}>Sign up</button>
             </form>
         </div>

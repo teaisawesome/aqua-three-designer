@@ -4,9 +4,10 @@ import {getSignupSchema} from "@/app/_lib/validationSchema";
 import connectToDatabase from "@/app/_lib/db/mongoose";
 import {User} from "@/app/_lib/models/User";
 import bcrypt from "bcryptjs";
+import {validationMessages} from "@/app/_lib/validationMessages";
 
 export async function signup(formData) {
-    const locale = formData.get("locale") || "en"
+    const locale = formData.get("locale") || "hu"
     const schema = getSignupSchema(locale)
 
     // Convert FormData to an object
@@ -22,13 +23,13 @@ export async function signup(formData) {
     }
 
     try {
-        // 🔹 Mentsd el az adatokat az adatbázisba (példa Prisma-val)
         await connectToDatabase()
 
         const existingUser = await User.findOne({ email: userData.email })
 
         if (existingUser) {
-            console.log("User already exists")
+            const messages = validationMessages[locale]
+            return { error: { email: { _errors: [messages.email_exists] } } }
         }
 
         const hashedPassword = await bcrypt.hash(userData.password, 10)
