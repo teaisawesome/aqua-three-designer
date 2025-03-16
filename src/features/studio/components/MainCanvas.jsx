@@ -10,6 +10,7 @@ import useStudioStore from "@/features/studio/stores/useStudioStore";
 import {EffectComposer, Outline, Selection, Select} from "@react-three/postprocessing";
 import TransformControlModeSelector from "@/features/studio/components/canvas-tools/TransformControlModeSelector";
 import InfoPanel from "@/features/studio/components/canvas-tools/InfoPanel";
+import SavePanel from "@/features/studio/components/canvas-tools/SavePanel";
 
 export default function MainCanvas() {
     const usedComponents = useStudioStore((state) => state.usedComponents)
@@ -102,6 +103,7 @@ export default function MainCanvas() {
                 </Canvas>
                 <TransformControlModeSelector/>
                 <InfoPanel/>
+                <SavePanel/>
             </div>
         </>
     )
