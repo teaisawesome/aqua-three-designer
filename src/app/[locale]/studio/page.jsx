@@ -5,15 +5,18 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 
 export default async function Studio() {
     const session = await getServerSession(options)
-    console.log("SESSION ON SERVER:", session); // 🔹 Debug
+
+    console.log("session", session)
 
     if (!session) {
-        console.log("🔴 No session found, redirecting...");
-        //redirect('/api/auth/signin?callbackUrl=/hu/studio')
+        redirect('/api/auth/signin?callbackUrl=/hu/studio')
     }
 
     return (
         <>
+            <header className={"bg-blue-500 text-white"}>Menüsáv
+                logged in: {session.user.name}
+            </header>
             <StudioComponent></StudioComponent>
         </>
     )
