@@ -17,7 +17,7 @@ export const options = {
                 }
             },
             async authorize(credentials) {
-                const user = { id: "42", name: "Dave", password: "nextauth" }
+                const user = { id: "42", name: "asd", password: "123" }
 
                 if (credentials?.username === user.name && credentials?.password === user.password) {
                     return { id: user.id, name: user.name };
@@ -33,17 +33,13 @@ export const options = {
         updateAge: 24 * 60 * 60 // Naponta frissíti a JWT-t
     },
     callbacks: {
-        async jwt({ token, user }) {
-            if (user) {
-                token.id = user.id; // Felhasználó ID mentése a tokenbe
-                token.name = user.name; // Név mentése a tokenbe
-            }
+        async jwt({ token }) {
+            console.log("JWT token: ", token)
             return token;
         },
         async session({ session, token }) {
-            session.user.id = token.id;
-            session.user.name = token.name;
-            return session;
+            console.log("Session: ", session)
+            return session
         }
     },
     cookies: {
@@ -52,7 +48,8 @@ export const options = {
             options: {
                 httpOnly: true,
                 sameSite: "lax",
-                secure: false, // 🔹 Productionben secure, developmentben nem
+                path: '/',
+                secure: false,
             }
         }
     },
