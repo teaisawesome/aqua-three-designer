@@ -7,7 +7,7 @@ export default function TransformControlModeSelector(props) {
 
     return (
         <div className={'absolute top-4 right-4'}>
-            <div className={'bg-sky-800 rounded-xl p-3.5 flex flex-col gap-4'}>
+            <div className={'bg-sky-800 rounded-xl p-3.5 flex flex-col gap-4 text-white'}>
                 <Move3d className={`${transformControlMode === 'translate' ? 'text-yellow-500 scale-125' : 'hover:text-green-500'} transition duration-300 hover:ease-in-out hover:scale-125 cursor-pointer`}
                         onClick={() => setTransformControlMode('translate')}/>
                 <Rotate3d className={`${transformControlMode === 'rotate' ? 'text-yellow-500 scale-125' : 'hover:text-green-500'} transition duration-300 hover:ease-in-out hover:scale-125 cursor-pointer`}
