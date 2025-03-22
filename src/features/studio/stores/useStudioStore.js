@@ -6,6 +6,8 @@ const useStudioStore = create((set) => ({
     selectedObject: null,
     index: 1,
     transformControlMode: 'translate',
+    lightColor: { r: 255, g: 255, b: 255 },
+    lightIntensity: 2,
     addUsedComponent: (title) =>
         set((state) => ({
             usedComponents: [...state.usedComponents, title],
@@ -64,7 +66,19 @@ const useStudioStore = create((set) => ({
                 }
                 return component
             })
-        }))
+        })),
+    setLightColor: (rgbColor) =>
+        set((state) => ({
+            lightColor: {
+                r: rgbColor.r,
+                g: rgbColor.g,
+                b: rgbColor.b,
+            }
+        })),
+    setLightIntensity: (intensityValue) =>
+        set((state) => ({
+            lightIntensity: intensityValue
+        })),
 }));
 
 export default useStudioStore;

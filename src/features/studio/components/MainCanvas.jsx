@@ -6,11 +6,14 @@ import classes from '../styles/studio.module.css'
 import {Suspense, useState, useRef, useEffect} from 'react'
 import { SimpleAquarium } from './models/aquariums/simple-aquarium/SimpleAquarium.jsx'
 import Cube from './models/plants/Cube'
+import RedCube from './models/plants/RedCube'
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 import {EffectComposer, Outline, Selection, Select} from "@react-three/postprocessing";
 import TransformControlModeSelector from "@/features/studio/components/canvas-tools/TransformControlModeSelector";
 import InfoPanel from "@/features/studio/components/canvas-tools/InfoPanel";
 import SavePanel from "@/features/studio/components/canvas-tools/SavePanel";
+import LightControlPanel from "@/features/studio/components/canvas-tools/LightControlPanel";
+import AquariumLight from "@/features/studio/components/lights/AquariumLight";
 
 export default function MainCanvas() {
     const usedComponents = useStudioStore((state) => state.usedComponents)
@@ -63,13 +66,7 @@ export default function MainCanvas() {
                         />
                     )}
                     <ambientLight intensity={0.5} />
-                    <directionalLight
-                        position={[5, 10, 5]}
-                        intensity={0.7}
-                        castShadow
-                        shadow-mapSize-width={1024}
-                        shadow-mapSize-height={1024}
-                    />
+                    <AquariumLight></AquariumLight>
                     <Suspense fallback={<div>Loading...</div>}>
                         <SimpleAquarium scale={0.1} position={[0, 0, 0]}/>
                     </Suspense>
@@ -95,6 +92,15 @@ export default function MainCanvas() {
                                                     id={component.id}
                                                     locked={component.locked}
                                         />;
+                                    case 'redcube':
+                                        return <RedCube
+                                            key={index}
+                                            position={[component.position.x, component.position.y, component.position.z]}
+                                            rotation={[component.rotation.x, component.rotation.y, component.rotation.z]}
+                                            scale={[component.scale.x, component.scale.y, component.scale.z]}
+                                            id={component.id}
+                                            locked={component.locked}
+                                        />;
                                     default: return null;
                                 }
                             })
@@ -104,6 +110,7 @@ export default function MainCanvas() {
                 <TransformControlModeSelector/>
                 <InfoPanel/>
                 <SavePanel/>
+                <LightControlPanel/>
             </div>
         </>
     )
