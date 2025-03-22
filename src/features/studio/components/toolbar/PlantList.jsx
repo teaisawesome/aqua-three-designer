@@ -3,14 +3,13 @@ import Tile from './Tile'
 export default function PlantList() {
     const t = [
         {
-            title: 'Micranthemum sp. Monte Carlo'
+            title: 'Micranthemum sp. Monte Carlo',
+            type: 'cube'
         },
         {
-            title: 'Rotala Vietnam Hra'
+            title: 'Rotala Vietnam Hra',
+            type: 'redcube'
         },
-        {
-            title: 'Anubias Nana Petite'
-        }
     ]
 
     return(
@@ -18,7 +17,11 @@ export default function PlantList() {
             {
                 t.map((t, index) => {
                     return (
-                        <Tile key={index} title={t.title} className='w-full'/>
+                        <Tile
+                            key={index}
+                            title={t.title}
+                            componentType={t.type}
+                            className='w-full'/>
                     )
                 })
             }
