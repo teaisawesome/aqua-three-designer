@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
+import * as THREE from "three";
 
 export function SimpleAquarium(props) {
     const { nodes, materials } = useGLTF('/models/aquariums/simple-aquarium.glb')
@@ -70,6 +71,10 @@ export function SimpleAquarium(props) {
                     material={materials['lambert2SG.001']}
                     rotation={[-Math.PI / 2, 0, 0]}
                 />
+                <mesh position={[0, -9, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[4, 4, 4]} receiveShadow>
+                    <planeGeometry args={[20, 20]} />
+                    <shadowMaterial opacity={0.5} />
+                </mesh>
             </group>
         </group>
     )
