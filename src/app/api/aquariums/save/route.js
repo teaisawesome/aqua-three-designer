@@ -18,7 +18,7 @@ export async function POST(req) {
     try {
         const body = await req.json()
         const {
-            usedComponents,
+            components,
             lightColor,
             lightIntensity,
         } = body
@@ -26,10 +26,11 @@ export async function POST(req) {
         await connectToDatabase()
 
         // PLANTS
-        const plants = usedComponents.reduce((acc, component) => {
+        const _components = components.reduce((acc, component) => {
             acc.push({
                 id: component.id,
-                componentId: component.componentId,
+                assetType: component.assetType,
+                assetId: component.assetId,
                 displayName: component.displayName,
                 locked: component.locked,
                 position: component.position,
@@ -48,7 +49,7 @@ export async function POST(req) {
 
         const aquariumData = {
             owner,
-            plants,
+            components: _components,
             light
         }
 

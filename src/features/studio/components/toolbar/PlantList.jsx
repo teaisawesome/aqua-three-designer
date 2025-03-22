@@ -4,11 +4,13 @@ export default function PlantList() {
     const t = [
         {
             title: 'Micranthemum sp. Monte Carlo',
-            type: 'cube'
+            assetType: 'plant',
+            assetId: 'cube'
         },
         {
             title: 'Rotala Vietnam Hra',
-            type: 'redcube'
+            assetType: 'plant',
+            assetId: 'redcube'
         },
     ]
 
@@ -20,7 +22,8 @@ export default function PlantList() {
                         <Tile
                             key={index}
                             title={t.title}
-                            componentType={t.type}
+                            assetType={t.assetType}
+                            assetId={t.assetId}
                             className='w-full'/>
                     )
                 })

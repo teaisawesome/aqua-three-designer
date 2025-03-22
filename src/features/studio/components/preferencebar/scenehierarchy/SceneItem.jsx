@@ -1,8 +1,8 @@
 import useStudioStore from "@/features/studio/stores/useStudioStore"
-import { Lock, LockOpen } from 'lucide-react'
+import { Lock, LockOpen, Leaf } from 'lucide-react'
 
 export default function SceneItem({item}) {
-    const { id, displayName, locked } = item
+    const { id, assetType, displayName, locked } = item
 
     const highlightedObjectId = useStudioStore((state) => state.highlightedObjectId)
     const addHighlightedObjectId = useStudioStore((state) => state.addHighlightedObjectId)
@@ -24,9 +24,18 @@ export default function SceneItem({item}) {
         }
     }
 
+    const icons = {
+        plant: <Leaf size={16} className={'text-green-400'} />,
+        // rock: <Gem />,
+        // wood: <Tree />,
+    }
+
     return (
         <div className={`${highlightedObjectId === id && 'bg-lime-800'} flex flex-row justify-between rounded p-1 items-center`}>
-            <span className={'cursor-pointer'} onClick={handleHighlight}>{ displayName }</span>
+            <div className={'flex flex-row items-center'}>
+                {icons[assetType]}
+                <span className={'cursor-pointer ml-1'} onClick={handleHighlight}>{ displayName }</span>
+            </div>
             <button onClick={handleToggleLock} className={"p1 cursor-pointer"}>
                 {locked ? (
                     <Lock size={20} className={'text-red-500'} />

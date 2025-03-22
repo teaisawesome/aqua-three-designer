@@ -11,7 +11,7 @@ export default function Tile({className, ...props}) {
         state.addComponent)
     const incrementIndex = useStudioStore((state) => state.incrementIndex)
 
-    const {title, componentType} = props
+    const {title, assetType, assetId} = props
     const [showAddSign, setShowAddSign] = useState(false)
     const [xPosition, setXPosition] = useState(1)
 
@@ -21,7 +21,8 @@ export default function Tile({className, ...props}) {
 
         addComponent({
             id: uniqueId,
-            componentId: componentType,
+            assetType,
+            assetId,
             displayName: currentIndexString.padStart(3, '0') + '_cube',
             locked: false,
             position: { x: xPosition, y: 0, z: 0 },

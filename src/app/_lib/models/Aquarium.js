@@ -29,9 +29,10 @@ const LightSchema = new mongoose.Schema({
     lightIntensity: { type: Number, required: true },
 })
 
-const PlantSchema = new mongoose.Schema({
+const ComponentSchema = new mongoose.Schema({
     id: { type: String, required: true },
-    componentId: { type: String, required: true },
+    assetType: { type: String, required: true },
+    assetId: { type: String, required: true },
     displayName: { type: String, required: true },
     locked: { type: Boolean, default: false },
     position: PositionSchema,
@@ -42,7 +43,7 @@ const PlantSchema = new mongoose.Schema({
 
 const AquariumScheme = new mongoose.Schema({
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true },
-    plants: [PlantSchema],
+    components: [ComponentSchema],
     light: LightSchema
 }, { timestamps: true })
 

@@ -82,7 +82,7 @@ export default function MainCanvas() {
                         {
                             components.map((component, index) => {
 
-                                switch (component.componentId) {
+                                switch (component.assetId) {
                                     case 'cube':
                                         return <Cube
                                                     key={index}
