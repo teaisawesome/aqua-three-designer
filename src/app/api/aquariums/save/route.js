@@ -17,10 +17,15 @@ export async function POST(req) {
 
     try {
         const body = await req.json()
-        const { usedComponents } = body
+        const {
+            usedComponents,
+            lightColor,
+            lightIntensity,
+        } = body
 
         await connectToDatabase()
 
+        // PLANTS
         const plants = usedComponents.reduce((acc, component) => {
             acc.push({
                 id: component.id,
@@ -35,9 +40,16 @@ export async function POST(req) {
             return acc
         }, [])
 
+        // LIGHT
+        const light = {
+            lightColor,
+            lightIntensity
+        }
+
         const aquariumData = {
             owner,
-            plants
+            plants,
+            light
         }
 
         await Aquarium.updateOne(
@@ -48,6 +60,7 @@ export async function POST(req) {
 
         return NextResponse.json('sikeres mentés', { status: 200 })
     } catch (error) {
+        console.log(error)
         return NextResponse.json({ error: "Hiba történt" }, { status: 500 })
     }
 }

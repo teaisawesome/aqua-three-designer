@@ -1,8 +1,5 @@
 'use client'
 
-import { DirectionalLightHelper } from "three";
-import {useRef} from "react";
-import {useHelper} from "@react-three/drei";
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 
 export default function AquariumLight() {

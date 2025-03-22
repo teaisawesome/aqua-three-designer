@@ -8,12 +8,12 @@ export default function RedCube(props) {
     const meshRef = useRef(null)
     const highlightedObjectId = useStudioStore((state) => state.highlightedObjectId)
     const addHighlightedObjectId = useStudioStore((state) => state.addHighlightedObjectId)
-    const setSelectedObjectInUsedComponent = useStudioStore((state) => state.setSelectedObjectInUsedComponent)
+    const setSelectedObjectInComponent = useStudioStore((state) => state.setSelectedObjectInComponent)
     const setSelectedObject = useStudioStore((state) => state.setSelectedObject)
 
     useEffect(() => {
         if(meshRef.current) {
-            setSelectedObjectInUsedComponent(id, meshRef.current)
+            setSelectedObjectInComponent(id, meshRef.current)
         }
     })
 

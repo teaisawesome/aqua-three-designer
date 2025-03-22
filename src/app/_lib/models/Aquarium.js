@@ -18,6 +18,17 @@ const ScaleSchema = new mongoose.Schema({
     z: { type: Number, required: true }
 })
 
+const LightColorSchema = new mongoose.Schema({
+    r: { type: Number, required: true },
+    g: { type: Number, required: true },
+    b: { type: Number, required: true }
+})
+
+const LightSchema = new mongoose.Schema({
+    lightColor: LightColorSchema,
+    lightIntensity: { type: Number, required: true },
+})
+
 const PlantSchema = new mongoose.Schema({
     id: { type: String, required: true },
     componentId: { type: String, required: true },
@@ -31,7 +42,8 @@ const PlantSchema = new mongoose.Schema({
 
 const AquariumScheme = new mongoose.Schema({
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true },
-    plants: [PlantSchema]
+    plants: [PlantSchema],
+    light: LightSchema
 }, { timestamps: true })
 
 export const Aquarium = mongoose.models.Aquarium || mongoose.model("Aquarium", AquariumScheme, "aquariums")

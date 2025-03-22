@@ -16,7 +16,7 @@ import LightControlPanel from "@/features/studio/components/canvas-tools/LightCo
 import AquariumLight from "@/features/studio/components/lights/AquariumLight";
 
 export default function MainCanvas() {
-    const usedComponents = useStudioStore((state) => state.usedComponents)
+    const components = useStudioStore((state) => state.components)
     const selectedObject = useStudioStore((state) => state.selectedObject)
     const transformRef = useRef(null)
     const orbitControlRef = useRef(null)
@@ -80,7 +80,7 @@ export default function MainCanvas() {
                             />
                         </EffectComposer>
                         {
-                            usedComponents.map((component, index) => {
+                            components.map((component, index) => {
 
                                 switch (component.componentId) {
                                     case 'cube':

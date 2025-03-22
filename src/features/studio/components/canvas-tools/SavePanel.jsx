@@ -2,14 +2,18 @@ import {Save} from "lucide-react";
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 
 export default function SavePanel(props) {
-    const usedComponents = useStudioStore((state) => state.usedComponents)
+    const components = useStudioStore((state) => state.components)
+    const lightColor = useStudioStore((state) => state.lightColor)
+    const lightIntensity = useStudioStore((state) => state.lightIntensity)
 
     const handleSave = () => {
         fetch("/api/aquariums/save", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                usedComponents
+                components,
+                lightColor,
+                lightIntensity
             })
         }).then(res => res.json()).then(data => console.log(data))
     }

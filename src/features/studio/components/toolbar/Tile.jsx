@@ -5,10 +5,10 @@ import useStudioStore from "@/features/studio/stores/useStudioStore";
 import {generateUUID} from "three/src/math/MathUtils";
 
 export default function Tile({className, ...props}) {
-    const usedComponents = useStudioStore((state) => state.usedComponents)
+    const components = useStudioStore((state) => state.components)
     const index = useStudioStore((state) => state.index)
-    const addUsedComponent = useStudioStore((state) =>
-        state.addUsedComponent)
+    const addComponent = useStudioStore((state) =>
+        state.addComponent)
     const incrementIndex = useStudioStore((state) => state.incrementIndex)
 
     const {title, componentType} = props
@@ -19,7 +19,7 @@ export default function Tile({className, ...props}) {
         const currentIndexString = index.toString()
         const uniqueId = generateUUID()
 
-        addUsedComponent({
+        addComponent({
             id: uniqueId,
             componentId: componentType,
             displayName: currentIndexString.padStart(3, '0') + '_cube',

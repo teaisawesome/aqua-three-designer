@@ -1,16 +1,16 @@
 import { create } from 'zustand'
 
 const useStudioStore = create((set) => ({
-    usedComponents: [],
+    components: [],
     highlightedObjectId: 0,
     selectedObject: null,
     index: 1,
     transformControlMode: 'translate',
     lightColor: { r: 255, g: 255, b: 255 },
     lightIntensity: 2,
-    addUsedComponent: (title) =>
+    addComponent: (title) =>
         set((state) => ({
-            usedComponents: [...state.usedComponents, title],
+            components: [...state.components, title],
         })),
     addHighlightedObjectId: (id) =>
         set((state) => ({
@@ -22,7 +22,7 @@ const useStudioStore = create((set) => ({
         })),
     toggleLockOnComponent: (componentId) =>
         set((state) => ({
-            usedComponents: state.usedComponents.map((component) =>
+            components: state.components.map((component) =>
                 component.id === componentId
                     ? { ...component, locked: !component.locked }
                     : component
@@ -32,9 +32,9 @@ const useStudioStore = create((set) => ({
         set((state) => ({
             selectedObject: object
         })),
-    setSelectedObjectInUsedComponent: (componentId, objectRef) =>
+    setSelectedObjectInComponent: (componentId, objectRef) =>
         set((state) => ({
-            usedComponents: state.usedComponents.map((component) =>
+            components: state.components.map((component) =>
                 component.id === componentId
                     ? { ...component, objectReference: objectRef}
                     : component
@@ -46,7 +46,7 @@ const useStudioStore = create((set) => ({
         })),
     setSelectedObjectTransform: (componentId, transformType, coordinateType, value) =>
         set((state) => ({
-            usedComponents: state.usedComponents.map((component) => {
+            components: state.components.map((component) => {
                 if (component.id === componentId) {
                     if(!['position','rotation', 'scale'].includes(transformType)) {
                         console.error("Invalid transform type");

@@ -1,9 +1,9 @@
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 
 export default function Properties() {
-    const usedComponents = useStudioStore((state) => state.usedComponents)
+    const components = useStudioStore((state) => state.components)
     const highlightedObjectId = useStudioStore((state) => state.highlightedObjectId)
-    const selectedComponentInfo = usedComponents.find((c) => c.id === highlightedObjectId)
+    const selectedComponentInfo = components.find((c) => c.id === highlightedObjectId)
     const setSelectedObjectTransform = useStudioStore((state) => state.setSelectedObjectTransform)
 
     return (
