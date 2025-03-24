@@ -25,18 +25,20 @@ export default function MainCanvas() {
     const setSelectedObjectTransform = useStudioStore((state) => state.setSelectedObjectTransform)
 
     const handlePositionChange = () => {
+        const obj = transformRef.current?.object
+
         if(highlightedObjectId && selectedObject) {
-            setSelectedObjectTransform(highlightedObjectId, 'position','x', selectedObject.position.x)
-            setSelectedObjectTransform(highlightedObjectId, 'position','y', selectedObject.position.y)
-            setSelectedObjectTransform(highlightedObjectId, 'position','z', selectedObject.position.z)
+            setSelectedObjectTransform(highlightedObjectId, 'position','x', obj.position.x)
+            setSelectedObjectTransform(highlightedObjectId, 'position','y', obj.position.y)
+            setSelectedObjectTransform(highlightedObjectId, 'position','z', obj.position.z)
 
-            setSelectedObjectTransform(highlightedObjectId, 'rotation','x', selectedObject.rotation.x)
-            setSelectedObjectTransform(highlightedObjectId, 'rotation','y', selectedObject.rotation.y)
-            setSelectedObjectTransform(highlightedObjectId, 'rotation','z', selectedObject.rotation.z)
+            setSelectedObjectTransform(highlightedObjectId, 'rotation','x', obj.rotation.x)
+            setSelectedObjectTransform(highlightedObjectId, 'rotation','y', obj.rotation.y)
+            setSelectedObjectTransform(highlightedObjectId, 'rotation','z', obj.rotation.z)
 
-            setSelectedObjectTransform(highlightedObjectId, 'scale','x', selectedObject.scale.x)
-            setSelectedObjectTransform(highlightedObjectId, 'scale','y', selectedObject.scale.y)
-            setSelectedObjectTransform(highlightedObjectId, 'scale','z', selectedObject.scale.z)
+            setSelectedObjectTransform(highlightedObjectId, 'scale','x', obj.scale.x)
+            setSelectedObjectTransform(highlightedObjectId, 'scale','y', obj.scale.y)
+            setSelectedObjectTransform(highlightedObjectId, 'scale','z', obj.scale.z)
         }
     }
 
