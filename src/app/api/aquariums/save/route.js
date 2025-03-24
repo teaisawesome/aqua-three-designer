@@ -49,6 +49,7 @@ export async function POST(req) {
 
         const aquariumData = {
             owner,
+            name: "Az én első akváriumom",
             components: _components,
             light
         }

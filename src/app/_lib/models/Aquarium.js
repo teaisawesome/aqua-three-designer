@@ -43,6 +43,7 @@ const ComponentSchema = new mongoose.Schema({
 
 const AquariumScheme = new mongoose.Schema({
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true },
+    name: { type: String, required: true },
     components: [ComponentSchema],
     light: LightSchema
 }, { timestamps: true })
