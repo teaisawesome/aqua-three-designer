@@ -1,21 +1,33 @@
 'use client'
 
-import {useEffect, useState} from "react";
 import useSWR from "swr";
-import SceneItem from "@/features/studio/components/preferencebar/scenehierarchy/SceneItem";
 import { formatMongoISODate } from "@/lib/dateHelper";
+import {useLocale} from "next-intl";
+import {useRouter} from "next/navigation";
+import useStudioStore from "@/features/studio/stores/useStudioStore";
 
 const fetcher = (url) => fetch(url).then(res => res.json())
 
 export default function Projects() {
-    const {data: aquariumList, error, isLoading} = useSWR("/api/aquariums/list", fetcher)
+    const {data: aquariumList, error, isLoading} = useSWR("/api/aquariums/list", fetcher) // ez a GET api/aquariums
+    const locale = useLocale()
+    const router = useRouter()
+    const loadStudioData = useStudioStore((state) => state.loadStudioData)
+
+    const setupStudio = (aquariumData) => {
+        const {components, light} = aquariumData
+        loadStudioData({components, light})
+
+        router.push(`/${locale}/studio/${aquariumData._id.toString()}`)
+    }
+
 
     if(isLoading) {
         return <div className={"w-1/2 h-1/2 bg-sky-900 rounded-xl shadow-2xl shadow-black bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10"}>
                 Loading...
         </div>
     }
-    if(isLoading) {
+    if(error) {
         return <div className={"w-1/2 h-1/2 bg-sky-900 rounded-xl shadow-2xl shadow-black bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10"}>
             Error happened...
         </div>
@@ -28,11 +40,14 @@ export default function Projects() {
                 {aquariumList.map((aquariumData, i) =>
                     <div key={i} className={"flex flex-row justify-between items-center w-full bg-amber-700 rounded-md p-2"}>
                         <div>
-                            <h5>{aquariumData._id}</h5>
-                            <span>{formatMongoISODate(aquariumData.updatedAt)}</span>
+                            <h5>{aquariumData.name}</h5>
+                            <span className={"text-sm"}>{formatMongoISODate(aquariumData.updatedAt)}</span>
                         </div>
-                        <div className={"flex flex-row"}>
-                            <button>Betöltés</button>
+                        <div className={"flex flex-row gap-5"}>
+                            <button
+                                className={"bg-sky-700 p-2 rounded-md shadow-md cursor-pointer"}
+
+                                onClick={() => setupStudio(aquariumData)}>Betöltés</button>
                             <button>Törlés</button>
                         </div>
                     </div>
