@@ -18,6 +18,7 @@ export async function POST(req) {
     try {
         const body = await req.json()
         const {
+            loadedAquariumId,
             components,
             lightColor,
             lightIntensity,
@@ -47,15 +48,16 @@ export async function POST(req) {
             lightIntensity
         }
 
+        const filter = { _id: loadedAquariumId, owner }
+
         const aquariumData = {
             owner,
-            name: "Az én első akváriumom",
             components: _components,
             light
         }
 
         await Aquarium.updateOne(
-            {owner},
+            filter,
             { $set : aquariumData },
             { new: true, upsert: true }
         )
