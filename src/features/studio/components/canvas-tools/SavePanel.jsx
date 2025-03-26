@@ -2,6 +2,7 @@ import {Save} from "lucide-react";
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 
 export default function SavePanel(props) {
+    const loadedAquariumId = useStudioStore((state) => state.loadedAquariumId)
     const components = useStudioStore((state) => state.components)
     const lightColor = useStudioStore((state) => state.lightColor)
     const lightIntensity = useStudioStore((state) => state.lightIntensity)
@@ -11,6 +12,7 @@ export default function SavePanel(props) {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
+                loadedAquariumId,
                 components,
                 lightColor,
                 lightIntensity

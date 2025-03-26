@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 
 const useStudioStore = create((set) => ({
+    loadedAquariumId: null,
     components: [],
     highlightedObjectId: 0,
     selectedObject: null,
@@ -81,6 +82,7 @@ const useStudioStore = create((set) => ({
         })),
     loadStudioData: (data) =>
         set(() => ({
+            loadedAquariumId: data._id.toString(),
             components: data.components || [],
             highlightedObjectId: 0,
             selectedObject: null,
