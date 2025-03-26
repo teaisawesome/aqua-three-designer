@@ -20,18 +20,22 @@ export const options = {
                 }
             },
             async authorize(credentials) {
-                await connectToDatabase()
+                try {
+                    await connectToDatabase()
 
-                const user = await User.findOne({ email: credentials.email })
+                    const user = await User.findOne({ email: credentials.email })
 
-                if(!user) return null
+                    if(!user) return null
 
-                const isValid = await bcrypt.compare(credentials.password, user.password)
+                    const isValid = await bcrypt.compare(credentials.password, user.password)
 
-                if(credentials?.email === user.email && isValid) {
-                    return { id: user._id.toString(), name: user.name, email: user.email };
-                } else {
-                    return null
+                    if(credentials?.email === user.email && isValid) {
+                        return { id: user._id.toString(), name: user.name, email: user.email };
+                    } else {
+                        return null
+                    }
+                } catch(e) {
+                    console.log("authorize error", e)
                 }
             }
         })
