@@ -6,8 +6,6 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 export default async function Studio() {
     const session = await getServerSession(options)
 
-    console.log("session", session)
-
     if (!session) {
         redirect('/api/auth/signin?callbackUrl=/hu/studio')
     }
