@@ -15,14 +15,10 @@ if (!cached) {
 }
 
 async function connectToDatabase() {
-    if (cached.conn) {
-        return cached.conn
-    }
+    if (cached.conn) return cached.conn
 
     if (!cached.promise) {
         cached.promise = mongoose.connect(DATABASE_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
             dbName: process.env.MONGODB_DATABASE,
         }).then((mongoose) => {
             return mongoose
@@ -30,6 +26,7 @@ async function connectToDatabase() {
             console.error("Mongo database connection error:", err)
         })
     }
+
     cached.conn = await cached.promise
     return cached.conn
 }
