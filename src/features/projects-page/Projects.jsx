@@ -4,7 +4,6 @@ import useSWR from "swr";
 import { formatMongoISODate } from "@/lib/dateHelper";
 import {useLocale} from "next-intl";
 import {useRouter} from "next/navigation";
-import useStudioStore from "@/features/studio/stores/useStudioStore";
 
 const fetcher = (url) => fetch(url).then(res => res.json())
 
@@ -12,12 +11,9 @@ export default function Projects() {
     const {data: aquariumList, error, isLoading} = useSWR("/api/aquariums/list", fetcher) // ez a GET api/aquariums
     const locale = useLocale()
     const router = useRouter()
-    const loadStudioData = useStudioStore((state) => state.loadStudioData)
 
     const setupStudio = (aquariumData) => {
-        const {components, light} = aquariumData
-        loadStudioData({components, light})
-
+        // needed function for redirect?
         router.push(`/${locale}/studio/${aquariumData._id.toString()}`)
     }
 
@@ -38,7 +34,7 @@ export default function Projects() {
             <h1 className={"text-2xl mb-3"}>My Personal Projects</h1>
             <div className={"flex flex-col w-full scrollbar scrollbar-thumb-sky-50  scrollbar-track-sky-800 h-full overflow-y-auto"}>
                 {aquariumList.map((aquariumData, i) =>
-                    <div key={i} className={"flex flex-row justify-between items-center w-full bg-amber-700 rounded-md p-2"}>
+                    <div key={i} className={"flex flex-row justify-between items-center w-full bg-amber-700 rounded-md p-2 mb-2"}>
                         <div>
                             <h5>{aquariumData.name}</h5>
                             <span className={"text-sm"}>{formatMongoISODate(aquariumData.updatedAt)}</span>
