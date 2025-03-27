@@ -1,4 +1,5 @@
 import useStudioStore from "@/features/studio/stores/useStudioStore";
+import { Info, CircleX } from 'lucide-react'
 
 export default function Properties() {
     const components = useStudioStore((state) => state.components)

@@ -13,6 +13,18 @@ const useStudioStore = create((set) => ({
         set((state) => ({
             components: [...state.components, title],
         })),
+    removeComponent: (id) =>
+        set((state) => {
+            const isTargetHighlighted = state.highlightedObjectId === id
+
+            return {
+                components: state.components.filter((c) => c.id !== id),
+                ...(isTargetHighlighted && {
+                    highlightedObjectId: 0,
+                    selectedObject: null
+                })
+            }
+        }),
     addHighlightedObjectId: (id) =>
         set((state) => ({
             highlightedObjectId: id

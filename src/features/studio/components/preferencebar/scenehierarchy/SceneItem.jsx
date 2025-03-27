@@ -1,5 +1,6 @@
 import useStudioStore from "@/features/studio/stores/useStudioStore"
-import { Lock, LockOpen, Leaf } from 'lucide-react'
+import {Lock, LockOpen, Leaf, EllipsisVertical, Trash2, PackageX} from 'lucide-react'
+import {useState} from "react";
 
 export default function SceneItem({item}) {
     const { id, assetType, displayName, locked } = item
@@ -9,6 +10,11 @@ export default function SceneItem({item}) {
     const components = useStudioStore((state) => state.components)
     const setSelectedObject = useStudioStore((state) => state.setSelectedObject)
     const toggleLockOnComponent = useStudioStore((state) => state.toggleLockOnComponent)
+    const removeComponent = useStudioStore((state) => state.removeComponent)
+
+    const [menuOpen, setMenuOpen] = useState(false)
+    const toggleMenu = () => setMenuOpen(prev => !prev)
+    const closeMenu = () => setMenuOpen(false)
 
     const handleHighlight = () => {
         if (locked) return
@@ -36,13 +42,28 @@ export default function SceneItem({item}) {
                 {icons[assetType]}
                 <span className={'cursor-pointer ml-1'} onClick={handleHighlight}>{ displayName }</span>
             </div>
-            <button onClick={handleToggleLock} className={"p1 cursor-pointer"}>
-                {locked ? (
-                    <Lock size={20} className={'text-red-500'} />
-                ) : (
-                    <LockOpen size={20} className={'text-green-500'}/>
-                )}
-            </button>
+            <div className={'flex flex-row items-center'} onMouseLeave={closeMenu}>
+                <div className={`flex flex-row items-center justify-center bg-sky-900 pl-1.5 py-1.5 rounded-lg`}>
+                    <button onClick={handleToggleLock} className={"p1 cursor-pointer"}>
+                        {locked ? (
+                            <Lock size={20} className={'text-red-500'} />
+                        ) : (
+                            <LockOpen size={20} className={'text-green-500'}/>
+                        )}
+                    </button>
+                    <button
+                        onClick={() => removeComponent(id)}
+                        className={`
+                            cursor-pointer transition-all duration-300 group
+                            ${menuOpen ? 'opacity-100 scale-100 w-6 ml-2.5 hover:text-yellow-400' : 'opacity-0 scale-0 w-0'}
+                            overflow-hidden
+                        `}
+                    >
+                        <Trash2 className="text-red-500" size={20}/>
+                    </button>
+                    <button onClick={toggleMenu} className={"cursor-pointer"}><EllipsisVertical size={20}/></button>
+                </div>
+            </div>
         </div>
     )
 }
