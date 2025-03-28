@@ -4,7 +4,6 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, TransformControls } from '@react-three/drei'
 import classes from '../styles/studio.module.css'
 import {Suspense, useState, useRef, useEffect} from 'react'
-import { SimpleAquarium } from './models/aquariums/simple-aquarium/SimpleAquarium.jsx'
 import Cube from './models/plants/Cube'
 import RedCube from './models/plants/RedCube'
 import useStudioStore from "@/features/studio/stores/useStudioStore";
@@ -14,6 +13,8 @@ import InfoPanel from "@/features/studio/components/canvas-tools/InfoPanel";
 import SavePanel from "@/features/studio/components/canvas-tools/SavePanel";
 import LightControlPanel from "@/features/studio/components/canvas-tools/LightControlPanel";
 import AquariumLight from "@/features/studio/components/lights/AquariumLight";
+import {BlackAquarium} from "@/features/studio/components/models/aquariums/simple-aquarium/BlackAquarium";
+import { SimpleAquarium } from './models/aquariums/simple-aquarium/SimpleAquarium.jsx'
 
 export default function MainCanvas() {
     const components = useStudioStore((state) => state.components)
@@ -70,7 +71,7 @@ export default function MainCanvas() {
                     <ambientLight intensity={0.5} />
                     <AquariumLight></AquariumLight>
                     <Suspense fallback={<div>Loading...</div>}>
-                        <SimpleAquarium scale={0.1} position={[0, 0, 0]}/>
+                        <BlackAquarium scale={0.1} position={[0, 0, 0]}/>
                     </Suspense>
                     <Selection>
                         <EffectComposer autoClear={false}>
