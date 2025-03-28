@@ -7,8 +7,8 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   return (
-      <>
-          {children}
-      </>
+      <html lang="en">
+        <body>{children}</body>
+      </html>
   )
 }
