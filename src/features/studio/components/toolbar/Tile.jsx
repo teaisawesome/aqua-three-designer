@@ -13,7 +13,7 @@ export default function Tile({className, ...props}) {
 
     const {title, assetType, assetId} = props
     const [showAddSign, setShowAddSign] = useState(false)
-    const [xPosition, setXPosition] = useState(1)
+    const [xPosition, setXPosition] = useState(0)
 
     function addPlant(){
         const currentIndexString = index.toString()
@@ -44,14 +44,16 @@ export default function Tile({className, ...props}) {
              bg-black/30 backdrop-blur-0 transition-opacity duration-300 ${showAddSign ? "opacity-100" : "opacity-0"}`}>
                 <Plus scale={20} className="text-white"/>
             </div>
-            <div>
-                <Image src='/img/anubias-barteli-tile-img.jpg' alt={title} width={200} height={200} style={{objectFit: "contain"}}/>
-            </div>
+            {
+                //<div>
+                //<Image src='/img/anubias-barteli-tile-img.jpg' alt={title} width={200} height={200} style={{objectFit: "contain"}}/>
+                //</div>
+            }
             <div className={'text-center leading-none'}>
                 <span className='text-tile-size'>{title}</span>
             </div>
         </div>
-        <input className={'text-black'} type="text" value={xPosition} id='xPosition' onChange={e => setXPosition(+(e.target.value))}/>
+        <input className={'text-yellow-400 bg-sky-800 p-3 rounded-lg'} type="number" step="0.1" value={xPosition} id='xPosition' onChange={e => setXPosition(parseFloat(e.target.value))}/>
         </>
     )
 }

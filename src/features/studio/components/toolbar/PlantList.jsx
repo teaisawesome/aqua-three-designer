@@ -3,12 +3,12 @@ import Tile from './Tile'
 export default function PlantList() {
     const t = [
         {
-            title: 'Micranthemum sp. Monte Carlo',
+            title: 'green cube',
             assetType: 'plant',
             assetId: 'cube'
         },
         {
-            title: 'Rotala Vietnam Hra',
+            title: 'red cube',
             assetType: 'plant',
             assetId: 'redcube'
         },
