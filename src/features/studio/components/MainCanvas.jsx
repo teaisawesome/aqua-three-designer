@@ -13,7 +13,7 @@ import InfoPanel from "@/features/studio/components/canvas-tools/InfoPanel";
 import SavePanel from "@/features/studio/components/canvas-tools/SavePanel";
 import LightControlPanel from "@/features/studio/components/canvas-tools/LightControlPanel";
 import AquariumLight from "@/features/studio/components/lights/AquariumLight";
-import {BlackAquarium} from "@/features/studio/components/models/aquariums/simple-aquarium/BlackAquarium";
+import {OptiWhiteAquarium} from "@/features/studio/components/models/aquariums/simple-aquarium/OptiWhiteAquarium";
 import { SimpleAquarium } from './models/aquariums/simple-aquarium/SimpleAquarium.jsx'
 
 export default function MainCanvas() {
@@ -71,14 +71,14 @@ export default function MainCanvas() {
                     <ambientLight intensity={0.5} />
                     <AquariumLight></AquariumLight>
                     <Suspense fallback={<div>Loading...</div>}>
-                        <BlackAquarium scale={0.1} position={[0, 0, 0]}/>
+                        <OptiWhiteAquarium scale={0.1} position={[0, 0, 0]}/>
                     </Suspense>
                     <Selection>
                         <EffectComposer autoClear={false}>
                             <Outline
                                 visibleEdgeColor='white'
-                                hiddenEdgeColor='black'
-                                edgeStrength={5}
+                                hiddenEdgeColor='white'
+                                edgeStrength={10}
                                 blur={false}
                             />
                         </EffectComposer>
