@@ -33,7 +33,8 @@ export default function Projects() {
         <div className={"flex flex-col items-center w-1/2 h-1/2 p-3 bg-sky-900 rounded-xl shadow-2xl shadow-black bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10"}>
             <h1 className={"text-2xl mb-3"}>My Personal Projects</h1>
             <div className={"flex flex-col w-full scrollbar scrollbar-thumb-sky-50  scrollbar-track-sky-800 h-full overflow-y-auto"}>
-                {aquariumList.map((aquariumData, i) =>
+                {
+                    aquariumList.length > 0 ? aquariumList.map((aquariumData, i) =>
                     <div key={i} className={"flex flex-row justify-between items-center w-full bg-amber-700 rounded-md p-2 mb-2"}>
                         <div>
                             <h5>{aquariumData.name}</h5>
@@ -47,7 +48,10 @@ export default function Projects() {
                             <button>Törlés</button>
                         </div>
                     </div>
-                )}
+                ) : <div>
+                        <h5 className={"text-center text-white"}>Nincs projekted, hozz létre egyet!</h5>
+                    </div>
+                }
             </div>
         </div>
     )
