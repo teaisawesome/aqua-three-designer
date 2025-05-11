@@ -6,9 +6,9 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  return (
-      <html lang="en">
-        <body>{children}</body>
-      </html>
-  )
+    return (
+        <html suppressHydrationWarning>
+            <body>{children}</body>
+        </html>
+    )
 }
