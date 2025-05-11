@@ -8,7 +8,6 @@ export default function SceneItem({item}) {
     const highlightedObjectId = useStudioStore((state) => state.highlightedObjectId)
     const addHighlightedObjectId = useStudioStore((state) => state.addHighlightedObjectId)
     const components = useStudioStore((state) => state.components)
-    const setSelectedObject = useStudioStore((state) => state.setSelectedObject)
     const toggleLockOnComponent = useStudioStore((state) => state.toggleLockOnComponent)
     const removeComponent = useStudioStore((state) => state.removeComponent)
 
@@ -18,15 +17,13 @@ export default function SceneItem({item}) {
 
     const handleHighlight = () => {
         if (locked) return
-        const usedComponentObjectRef = components.find((c) => c.id === id)?.objectReference ?? null;
+
         addHighlightedObjectId(highlightedObjectId === id ? null : id)
-        setSelectedObject(highlightedObjectId === id ? null : usedComponentObjectRef)
     }
     const handleToggleLock = () => {
         toggleLockOnComponent(id)
         if (highlightedObjectId === id) {
             addHighlightedObjectId(null)
-            setSelectedObject(null)
         }
     }
 

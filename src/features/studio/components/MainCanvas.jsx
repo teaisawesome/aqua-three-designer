@@ -3,32 +3,34 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, TransformControls } from '@react-three/drei'
 import classes from '../styles/studio.module.css'
-import {Suspense, useState, useRef, useEffect} from 'react'
+import {Suspense, useRef} from 'react'
 import Cube from './models/plants/Cube'
 import RedCube from './models/plants/RedCube'
 import useStudioStore from "@/features/studio/stores/useStudioStore";
-import {EffectComposer, Outline, Selection, Select} from "@react-three/postprocessing";
+import {EffectComposer, Outline, Selection} from "@react-three/postprocessing";
 import TransformControlModeSelector from "@/features/studio/components/canvas-tools/TransformControlModeSelector";
 import InfoPanel from "@/features/studio/components/canvas-tools/InfoPanel";
 import SavePanel from "@/features/studio/components/canvas-tools/SavePanel";
 import LightControlPanel from "@/features/studio/components/canvas-tools/LightControlPanel";
 import AquariumLight from "@/features/studio/components/lights/AquariumLight";
 import {OptiWhiteAquarium} from "@/features/studio/components/models/aquariums/simple-aquarium/OptiWhiteAquarium";
-import { SimpleAquarium } from './models/aquariums/simple-aquarium/SimpleAquarium.jsx'
+import {getComponentRef} from "@/lib/registry/componentRefRegistry";
 
 export default function MainCanvas() {
     const components = useStudioStore((state) => state.components)
-    const selectedObject = useStudioStore((state) => state.selectedObject)
+    // const selectedObject = useStudioStore((state) => state.selectedObject)
     const transformRef = useRef(null)
     const orbitControlRef = useRef(null)
     const transformControlMode = useStudioStore((state) => state.transformControlMode)
     const highlightedObjectId = useStudioStore((state) => state.highlightedObjectId)
     const setSelectedObjectTransform = useStudioStore((state) => state.setSelectedObjectTransform)
 
+    const selectedComponentRef = highlightedObjectId ? getComponentRef(highlightedObjectId) : null
+
     const handlePositionChange = () => {
         const obj = transformRef.current?.object
 
-        if(highlightedObjectId && selectedObject) {
+        if(highlightedObjectId && obj) {
             setSelectedObjectTransform(highlightedObjectId, 'position','x', obj.position.x)
             setSelectedObjectTransform(highlightedObjectId, 'position','y', obj.position.y)
             setSelectedObjectTransform(highlightedObjectId, 'position','z', obj.position.z)
@@ -58,10 +60,10 @@ export default function MainCanvas() {
                         minDistance={2}
                         maxDistance={10}
                     />
-                    {selectedObject && (
+                    {selectedComponentRef && (
                         <TransformControls
                             ref={transformRef}
-                            object={selectedObject}
+                            object={selectedComponentRef}
                             mode={transformControlMode}
                             onMouseDown={() => orbitControlRef.current.enableRotate = false}
                             onMouseUp={() => orbitControlRef.current.enableRotate = true}
