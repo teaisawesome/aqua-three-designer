@@ -41,18 +41,6 @@ const useStudioStore = create((set) => ({
                     : component
             ),
         })),
-    setSelectedObject: (object) =>
-        set((state) => ({
-            selectedObject: object
-        })),
-    setSelectedObjectInComponent: (componentId, objectRef) =>
-        set((state) => ({
-            components: state.components.map((component) =>
-                component.id === componentId
-                    ? { ...component, objectReference: objectRef}
-                    : component
-            )
-        })),
     setTransformControlMode: (mode) =>
         set((state) => ({
             transformControlMode: mode
