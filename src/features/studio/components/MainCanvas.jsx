@@ -47,7 +47,7 @@ export default function MainCanvas() {
 
     return (
         <>
-            <div className="flex-1 w-2/4 relative">
+            <div className="flex-1 w-2/4 relative h-dvh">
                 <Canvas shadows dpr={[1, 2]} className={classes.canvas} camera={{position: [0, 2, 10], fov: 50}}>
                     <OrbitControls
                         ref={orbitControlRef}

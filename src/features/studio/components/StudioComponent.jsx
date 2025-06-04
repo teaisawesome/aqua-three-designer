@@ -20,14 +20,10 @@ export default function StudioComponent({...props}) {
     if(loading) return <div className="text-white">Studio Betöltés...</div>
 
     return (
-        <div>
-            <div className="flex flex-col h-screen">
-                <div className={"flex flex-1"}>
-                    <ToolBar></ToolBar>
-                    <MainCanvas />
-                    <PreferenceBar></PreferenceBar>
-                </div>
-            </div>
+        <div className="flex flex-row h-dvh">
+                <ToolBar/>
+                <MainCanvas />
+                <PreferenceBar/>
         </div>
     )
 }
