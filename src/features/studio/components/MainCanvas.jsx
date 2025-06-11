@@ -47,8 +47,10 @@ export default function MainCanvas() {
 
     return (
         <>
-            <div className="flex-1 w-2/4 relative h-dvh">
-                <Canvas shadows dpr={[1, 2]} className={classes.canvas} camera={{position: [0, 2, 10], fov: 50}}>
+            <div className={"w-full h-full  md:flex-1 md:w-2/4 md:relative md:h-dvh"}>
+                <Canvas
+                    className={"bg-blue-300"}
+                    shadows dpr={[1, 2]} camera={{position: [0, 2, 10], fov: 50}}>
                     <OrbitControls
                         ref={orbitControlRef}
                         enableDamping={true}
@@ -113,9 +115,9 @@ export default function MainCanvas() {
                     </Selection>
                 </Canvas>
                 <TransformControlModeSelector/>
-                <InfoPanel/>
+                <InfoPanel className={"hidden md:block"}/>
                 <SavePanel/>
-                <LightControlPanel/>
+                <LightControlPanel className={"hidden md:block"}/>
             </div>
         </>
     )

@@ -1,6 +1,6 @@
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 
-export default function LightControlPanel(props) {
+export default function LightControlPanel({className}) {
     const lightColor = useStudioStore((state) => state.lightColor)
     const setLightColor = useStudioStore((state) => state.setLightColor)
     const lightIntensity = useStudioStore((state) => state.lightIntensity)
@@ -23,7 +23,7 @@ export default function LightControlPanel(props) {
     }
 
     return (
-        <div className={"absolute top-20 left-4 bg-sky-800 p-3 rounded-xl color-white"}>
+        <div className={`${className} absolute top-20 left-4 bg-sky-800 p-3 rounded-xl color-white`}>
             <label>R: <input type="range" min="0" max="255" value={lightColor.r} onChange={(e) => handleRgbInputChange('r', +e.target.value) } /></label><br />
             <label>G: <input type="range" min="0" max="255" value={lightColor.g} onChange={(e) => handleRgbInputChange('g', +e.target.value) } /></label><br />
             <label>B: <input type="range" min="0" max="255" value={lightColor.b} onChange={(e) => handleRgbInputChange('b', +e.target.value) } /></label><br />

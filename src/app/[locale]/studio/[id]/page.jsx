@@ -18,12 +18,9 @@ export default async function StudioPage({ params }) {
         const aquarium = JSON.parse(JSON.stringify(data))
 
         return (
-            <>
-                <header className={"bg-blue-500 text-white"}>Menüsáv
-                    logged in: {session.user.name}
-                </header>
+            <div className={"h-screen"}>
                 <StudioComponent aquarium={aquarium}></StudioComponent>
-            </>
+            </div>
         )
     } catch (error) {
         return <div className="text-red-500">Hiba: {error.message}</div>
