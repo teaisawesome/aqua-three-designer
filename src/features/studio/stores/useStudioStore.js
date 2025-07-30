@@ -9,6 +9,7 @@ const useStudioStore = create((set) => ({
     transformControlMode: 'translate',
     lightColor: { r: 255, g: 255, b: 255 },
     lightIntensity: 0.5,
+    isMobileToolbarActive: false,
     addComponent: (title) =>
         set((state) => ({
             components: [...state.components, title],
@@ -90,7 +91,8 @@ const useStudioStore = create((set) => ({
             transformControlMode: 'translate',
             lightColor: data.light.lightColor || { r: 255, g: 255, b: 255 },
             lightIntensity: data.light.lightIntensity || 0.5
-        }))
+        })),
+    setIsMobileToolbarActive: (isActive) => set({ isMobileToolbarActive: isActive })
 }));
 
 export default useStudioStore;

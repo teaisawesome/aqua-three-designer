@@ -15,7 +15,7 @@ import LightControlPanel from "@/features/studio/components/canvas-tools/LightCo
 import AquariumLight from "@/features/studio/components/lights/AquariumLight";
 import {OptiWhiteAquarium} from "@/features/studio/components/models/aquariums/simple-aquarium/OptiWhiteAquarium";
 import {getComponentRef} from "@/lib/registry/componentRefRegistry";
-import NewObjectButton from "@/features/studio/components/canvas-tools/NewObjectButton";
+import NewObjectButton from "@/features/studio/components/canvas-tools/mobile/NewObjectButton";
 
 export default function MainCanvas({ isMobile }) {
     const components = useStudioStore((state) => state.components)
