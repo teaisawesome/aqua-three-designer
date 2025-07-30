@@ -2,7 +2,7 @@ import Image from 'next/image'
 import {useState} from "react";
 import { Plus } from 'lucide-react'
 import useStudioStore from "@/features/studio/stores/useStudioStore";
-import {generateUUID} from "three/src/math/MathUtils";
+import {MathUtils} from "three";
 
 export default function Tile({className, ...props}) {
     const components = useStudioStore((state) => state.components)
@@ -17,7 +17,7 @@ export default function Tile({className, ...props}) {
 
     function addPlant(){
         const currentIndexString = index.toString()
-        const uniqueId = generateUUID()
+        const uniqueId = MathUtils.generateUUID()
 
         addComponent({
             id: uniqueId,

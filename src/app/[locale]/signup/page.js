@@ -1,11 +1,11 @@
 "use client"
 
 import {getSignupSchema} from "@/app/_lib/validationSchema";
-import {useState} from "react";
+import {use, useState} from "react";
 import {signup} from "@/app/[locale]/signup/action";
 
 export default function Signup({ params }) {
-    const locale = params.locale;
+    const {locale} = use(params);
     const schema = getSignupSchema(locale);
 
     const [formData, setFormData] = useState({ name: "", email: "", password: "" });

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function TransformTypeInput({value, transformType, coordinateType, onCommit}) {
+export default function TransformTypeInput({value, coordinateType, onCommit}) {
     const toUserUnits = (real) => Math.round(real * 1000)
     const fromUserUnits = (user) => user / 1000
 
@@ -16,10 +16,6 @@ export default function TransformTypeInput({value, transformType, coordinateType
                 return 'border-blue-500';
         }
     };
-
-    useEffect(() => {
-        setInputValue(toUserUnits(value).toString())
-    }, [value])
 
     const handleChange = (e) => {
         const raw = e.target.value

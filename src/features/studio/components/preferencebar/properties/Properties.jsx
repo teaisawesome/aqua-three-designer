@@ -32,26 +32,26 @@ export default function Properties({ isMobile = false}) {
                                     <div className="flex flex-row space-x-3.5">
                                         <div className="w-1/3">
                                             <TransformTypeInput
+                                                key={`${highlightedObjectId}-${transformType}-x-${selectedComponentInfo[transformType].x}`}
                                                 value={selectedComponentInfo[transformType].x}
-                                                transformType
                                                 coordinateType={"x"}
                                                 onCommit={(val) => setSelectedObjectTransform(highlightedObjectId, transformType, 'x', val)}
                                             />
                                         </div>
                                         <div className="w-1/3">
                                             <TransformTypeInput
+                                                key={`${highlightedObjectId}-${transformType}-y-${selectedComponentInfo[transformType].y}`}
                                                 value={selectedComponentInfo[transformType].y}
-                                                transformType
                                                 coordinateType={"y"}
                                                 onCommit={(val) => setSelectedObjectTransform(highlightedObjectId, transformType, 'y', val)}
                                             />
                                         </div>
                                         <div className="w-1/3">
                                             <TransformTypeInput
+                                                key={`${highlightedObjectId}-${transformType}-z-${selectedComponentInfo[transformType].z}`}
                                                 value={selectedComponentInfo[transformType].z}
-                                                transformType
                                                 coordinateType={"z"}
-                                                onCommit={(val) => setSelectedObjectTransform(highlightedObjectId, transformType, 'x', val)}
+                                                onCommit={(val) => setSelectedObjectTransform(highlightedObjectId, transformType, 'z', val)}
                                             />
                                         </div>
                                     </div>

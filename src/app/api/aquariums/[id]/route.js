@@ -8,13 +8,12 @@ import {options} from "@/app/api/auth/[...nextauth]/options";
 import mongoose from "mongoose";
 
 export async function GET(req, { params }) {
+    const {id} = await params
     const session = await getServerSession(options)
 
     if (!session) {
         return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
-
-    const id = params.id
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return NextResponse.json({ error: "Not a valid id" }, { status: 400 });
