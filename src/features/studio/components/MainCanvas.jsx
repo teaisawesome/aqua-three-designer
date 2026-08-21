@@ -50,7 +50,7 @@ export default function MainCanvas({ isMobile }) {
             <div className={"w-full h-full  md:flex-1 md:w-2/4 md:relative md:h-dvh"}>
                 <Canvas
                     className={"bg-blue-300"}
-                    shadows dpr={[1, 2]} camera={{position: [0, 0.35, 1.2], fov: 50}}>
+                    shadows="percentage" dpr={[1, 2]} camera={{position: [0, 0.35, 1.2], fov: 50}}>
                     <OrbitControls
                         ref={orbitControlRef}
                         enableDamping={true}
