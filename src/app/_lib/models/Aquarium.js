@@ -37,8 +37,7 @@ const ComponentSchema = new mongoose.Schema({
     locked: { type: Boolean, default: false },
     position: PositionSchema,
     rotation: RotationSchema,
-    scale: ScaleSchema,
-    objectReference: { type: mongoose.Schema.Types.Mixed, required: true }
+    scale: ScaleSchema
 })
 
 const AquariumScheme = new mongoose.Schema({

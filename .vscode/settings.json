@@ -1,0 +1,6 @@
+{
+    "i18n-ally-next.localesPaths": [
+        "messages",
+        "src/i18n"
+    ]
+}

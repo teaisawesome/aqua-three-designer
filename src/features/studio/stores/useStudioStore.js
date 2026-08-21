@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import {normalizeLegacyComponents} from '@/domain/project/serialization.mjs'
 
 const useStudioStore = create((set) => ({
     loadedAquariumId: null,
@@ -84,13 +85,13 @@ const useStudioStore = create((set) => ({
     loadStudioData: (data) =>
         set(() => ({
             loadedAquariumId: data._id.toString(),
-            components: data.components || [],
+            components: normalizeLegacyComponents(data.components),
             highlightedObjectId: 0,
             selectedObject: null,
-            index: data.components.length + 1 || 1,
+            index: (data.components?.length ?? 0) + 1,
             transformControlMode: 'translate',
-            lightColor: data.light.lightColor || { r: 255, g: 255, b: 255 },
-            lightIntensity: data.light.lightIntensity || 0.5
+            lightColor: data.light?.lightColor ?? { r: 255, g: 255, b: 255 },
+            lightIntensity: data.light?.lightIntensity ?? 0.5
         })),
     setIsMobileToolbarActive: (isActive) => set({ isMobileToolbarActive: isActive })
 }));

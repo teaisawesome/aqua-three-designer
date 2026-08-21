@@ -1,5 +1,6 @@
 import {Save} from "lucide-react";
 import useStudioStore from "@/features/studio/stores/useStudioStore";
+import {createSavePayload} from "@/domain/project/serialization.mjs";
 
 export default function SavePanel(props) {
     const loadedAquariumId = useStudioStore((state) => state.loadedAquariumId)
@@ -11,12 +12,12 @@ export default function SavePanel(props) {
         fetch("/api/aquariums/save", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
+            body: JSON.stringify(createSavePayload({
                 loadedAquariumId,
                 components,
                 lightColor,
                 lightIntensity
-            })
+            }))
         }).then(res => res.json()).then(data => console.log(data))
     }
 

@@ -5,6 +5,7 @@ import connectToDatabase from "@/app/_lib/db/mongoose"
 import { Aquarium } from "@/app/_lib/models/Aquarium";
 import {getServerSession} from "next-auth";
 import {options} from "@/app/api/auth/[...nextauth]/options";
+import {assertPlainSerializable, serializeComponent} from "@/domain/project/serialization.mjs";
 
 export async function POST(req) {
     const session = await getServerSession(options)
@@ -27,20 +28,9 @@ export async function POST(req) {
         await connectToDatabase()
 
         // PLANTS
-        const _components = components.reduce((acc, component) => {
-            acc.push({
-                id: component.id,
-                assetType: component.assetType,
-                assetId: component.assetId,
-                displayName: component.displayName,
-                locked: component.locked,
-                position: component.position,
-                rotation: component.rotation,
-                scale: component.scale,
-                objectReference: component.objectReference
-            })
-            return acc
-        }, [])
+        const _components = Array.isArray(components)
+            ? components.map(serializeComponent)
+            : []
 
         // LIGHT
         const light = {
@@ -55,6 +45,8 @@ export async function POST(req) {
             components: _components,
             light
         }
+
+        assertPlainSerializable({ components: _components, light })
 
         await Aquarium.updateOne(
             filter,
