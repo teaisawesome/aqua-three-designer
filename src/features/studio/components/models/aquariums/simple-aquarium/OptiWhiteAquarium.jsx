@@ -1,21 +1,15 @@
 'use client'
 
 import { useGLTF } from '@react-three/drei'
+import { useMemo } from 'react'
+
+const MODEL_URL = '/models/aquariums/opti-white-aquarium.glb?v=2'
 
 export function OptiWhiteAquarium(props) {
-    const { nodes, materials } = useGLTF('/models/aquariums/opti-white-aquarium.glb')
+    const {scene} = useGLTF(MODEL_URL)
+    const instance = useMemo(() => scene.clone(), [scene])
 
-    return (
-        <group {...props} dispose={null}>
-            <mesh
-                receiveShadow
-                geometry={nodes.Cube.geometry}
-                material={materials.Glass}
-                scale={[10, 10, 10]}
-                depthWrite={false}
-            />
-        </group>
-    )
+    return <primitive object={instance} {...props} dispose={null}/>
 }
 
-useGLTF.preload('/models/aquariums/opti-white-aquarium.glb')
+useGLTF.preload(MODEL_URL)

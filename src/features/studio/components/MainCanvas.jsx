@@ -50,7 +50,7 @@ export default function MainCanvas({ isMobile }) {
             <div className={"w-full h-full  md:flex-1 md:w-2/4 md:relative md:h-dvh"}>
                 <Canvas
                     className={"bg-blue-300"}
-                    shadows dpr={[1, 2]} camera={{position: [0, 2, 10], fov: 50}}>
+                    shadows dpr={[1, 2]} camera={{position: [0, 0.35, 1.2], fov: 50}}>
                     <OrbitControls
                         ref={orbitControlRef}
                         enableDamping={true}
@@ -59,8 +59,9 @@ export default function MainCanvas({ isMobile }) {
                         maxAzimuthAngle={Math.PI / 2}
                         minPolarAngle={Math.PI / 6}
                         maxPolarAngle={Math.PI - Math.PI / 2}
-                        minDistance={2}
-                        maxDistance={10}
+                        target={[0, 0.15, 0]}
+                        minDistance={0.3}
+                        maxDistance={5}
                     />
                     {selectedComponentRef && (
                         <TransformControls
@@ -75,7 +76,7 @@ export default function MainCanvas({ isMobile }) {
                     <ambientLight intensity={0.5} />
                     <AquariumLight></AquariumLight>
                     <Suspense fallback={<div>Loading...</div>}>
-                        <OptiWhiteAquarium scale={0.1} position={[0, 0, 0]}/>
+                        <OptiWhiteAquarium position={[0, 0, 0]}/>
                     </Suspense>
                     <Selection>
                         <EffectComposer autoClear={false}>

@@ -16,8 +16,12 @@
 # idea
 .idea
 
-# public
-/public
+# public (keep normalized aquarium source assets versioned)
+/public/*
+!/public/models/
+/public/models/*
+!/public/models/aquariums/
+!/public/models/aquariums/*.glb
 
 # production
 /build

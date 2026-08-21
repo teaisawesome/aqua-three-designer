@@ -10,7 +10,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "test": "node --test"
+    "test": "node --test",
+    "assets:audit": "node scripts/audit-aquarium-glbs.mjs",
+    "assets:normalize": "node scripts/normalize-aquarium-glbs.mjs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
