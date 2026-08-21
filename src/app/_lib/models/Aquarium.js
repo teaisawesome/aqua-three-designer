@@ -31,9 +31,13 @@ const LightSchema = new mongoose.Schema({
 
 const ComponentSchema = new mongoose.Schema({
     id: { type: String, required: true },
-    assetType: { type: String, required: true },
     assetId: { type: String, required: true },
-    displayName: { type: String, required: true },
+    assetVersion: { type: Number, required: true, default: 1 },
+    kind: { type: String, required: true },
+    name: { type: String },
+    // Compatibility fields for old documents. The save allowlist never writes them.
+    assetType: { type: String },
+    displayName: { type: String },
     locked: { type: Boolean, default: false },
     position: PositionSchema,
     rotation: RotationSchema,

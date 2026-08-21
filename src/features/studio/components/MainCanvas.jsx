@@ -4,8 +4,6 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, TransformControls } from '@react-three/drei'
 import classes from '../styles/studio.module.css'
 import {Suspense, useRef} from 'react'
-import Cube from './models/plants/Cube'
-import RedCube from './models/plants/RedCube'
 import useStudioStore from "@/features/studio/stores/useStudioStore";
 import {EffectComposer, Outline, Selection} from "@react-three/postprocessing";
 import TransformControlModeSelector from "@/features/studio/components/canvas-tools/TransformControlModeSelector";
@@ -16,6 +14,7 @@ import AquariumLight from "@/features/studio/components/lights/AquariumLight";
 import {OptiWhiteAquarium} from "@/features/studio/components/models/aquariums/simple-aquarium/OptiWhiteAquarium";
 import {getComponentRef} from "@/lib/registry/componentRefRegistry";
 import NewObjectButton from "@/features/studio/components/canvas-tools/mobile/NewObjectButton";
+import AssetInstance from "@/features/studio/components/scene/AssetInstance";
 
 export default function MainCanvas({ isMobile }) {
     const components = useStudioStore((state) => state.components)
@@ -88,30 +87,9 @@ export default function MainCanvas({ isMobile }) {
                             />
                         </EffectComposer>
                         {
-                            components.map((component, index) => {
-
-                                switch (component.assetId) {
-                                    case 'cube':
-                                        return <Cube
-                                                    key={index}
-                                                    position={[component.position.x, component.position.y, component.position.z]}
-                                                    rotation={[component.rotation.x, component.rotation.y, component.rotation.z]}
-                                                    scale={[component.scale.x, component.scale.y, component.scale.z]}
-                                                    id={component.id}
-                                                    locked={component.locked}
-                                        />;
-                                    case 'redcube':
-                                        return <RedCube
-                                            key={index}
-                                            position={[component.position.x, component.position.y, component.position.z]}
-                                            rotation={[component.rotation.x, component.rotation.y, component.rotation.z]}
-                                            scale={[component.scale.x, component.scale.y, component.scale.z]}
-                                            id={component.id}
-                                            locked={component.locked}
-                                        />;
-                                    default: return null;
-                                }
-                            })
+                            components.map((component) => (
+                                <AssetInstance key={component.id} instance={component}/>
+                            ))
                         }
                     </Selection>
                 </Canvas>

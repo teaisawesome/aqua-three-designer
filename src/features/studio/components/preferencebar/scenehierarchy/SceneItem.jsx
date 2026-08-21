@@ -1,9 +1,11 @@
 import useStudioStore from "@/features/studio/stores/useStudioStore"
 import {Lock, LockOpen, Leaf, EllipsisVertical, Trash2, PackageX} from 'lucide-react'
 import {useState} from "react";
+import {resolveAssetDefinition} from "@/domain/assets/catalog.mjs";
 
 export default function SceneItem({item}) {
-    const { id, assetType, displayName, locked } = item
+    const { id, kind, name, locked } = item
+    const asset = resolveAssetDefinition(item.assetId, item.assetVersion)
 
     const highlightedObjectId = useStudioStore((state) => state.highlightedObjectId)
     const addHighlightedObjectId = useStudioStore((state) => state.addHighlightedObjectId)
@@ -36,8 +38,8 @@ export default function SceneItem({item}) {
     return (
         <div className={`${highlightedObjectId === id && 'bg-lime-800'} flex flex-row justify-between rounded p-1 items-center`}>
             <div className={'flex flex-row items-center'}>
-                {icons[assetType]}
-                <span className={'cursor-pointer ml-1'} onClick={handleHighlight}>{ displayName }</span>
+                {asset ? icons[kind] : <PackageX size={16} className={'text-fuchsia-400'}/>}
+                <span className={'cursor-pointer ml-1'} onClick={handleHighlight}>{name ?? asset?.displayName ?? item.assetId}</span>
             </div>
             <div className={'flex flex-row items-center'} onMouseLeave={closeMenu}>
                 <div className={`flex flex-row items-center justify-center bg-sky-900 pl-1.5 py-1.5 rounded-lg`}>

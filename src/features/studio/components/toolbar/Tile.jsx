@@ -11,7 +11,7 @@ export default function Tile({className, ...props}) {
         state.addComponent)
     const incrementIndex = useStudioStore((state) => state.incrementIndex)
 
-    const {title, assetType, assetId} = props
+    const {asset} = props
     const [showAddSign, setShowAddSign] = useState(false)
     const [xPosition, setXPosition] = useState(0)
 
@@ -21,9 +21,10 @@ export default function Tile({className, ...props}) {
 
         addComponent({
             id: uniqueId,
-            assetType,
-            assetId,
-            displayName: currentIndexString.padStart(3, '0') + '_cube',
+            assetId: asset.id,
+            assetVersion: asset.version,
+            kind: asset.kind,
+            name: `${currentIndexString.padStart(3, '0')}_${asset.displayName}`,
             locked: false,
             position: { x: xPosition, y: 0, z: 0 },
             rotation: { x: 0, y: 0, z: 0 },
@@ -50,7 +51,7 @@ export default function Tile({className, ...props}) {
                 //</div>
             }
             <div className={'text-center leading-none'}>
-                <span className='text-tile-size'>{title}</span>
+                <span className='text-tile-size'>{asset.displayName}</span>
             </div>
         </div>
         <input className={'text-yellow-400 bg-sky-800 p-3 rounded-lg'} type="number" step="0.1" value={xPosition} id='xPosition' onChange={e => setXPosition(parseFloat(e.target.value))}/>

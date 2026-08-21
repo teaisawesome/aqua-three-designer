@@ -9,9 +9,10 @@ function copyVector(vector, fallback) {
 export function serializeComponent(component) {
     return {
         id: component.id,
-        assetType: component.assetType,
         assetId: component.assetId,
-        displayName: component.displayName,
+        assetVersion: component.assetVersion ?? 1,
+        kind: component.kind ?? component.assetType,
+        name: component.name ?? component.displayName,
         locked: component.locked ?? false,
         position: copyVector(component.position, 0),
         rotation: copyVector(component.rotation, 0),

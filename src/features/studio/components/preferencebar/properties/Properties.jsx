@@ -78,7 +78,7 @@ export default function Properties({ isMobile = false}) {
                                         <div className="w-full">
                                             <input
                                                 className="bg-sky-900 appearance-none rounded w-full pl-1 leading-tight text-white"
-                                                id="inline-full-name" type="text" value={selectedComponentInfo.displayName} disabled={true} readOnly />
+                                                id="inline-full-name" type="text" value={selectedComponentInfo.name ?? selectedComponentInfo.assetId} disabled={true} readOnly />
                                         </div>
                                     </div>
                                 </div>

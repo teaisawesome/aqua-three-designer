@@ -1,29 +1,17 @@
 import Tile from './Tile'
+import {listAssetDefinitions} from "@/domain/assets/catalog.mjs"
 
 export default function PlantList() {
-    const t = [
-        {
-            title: 'green cube',
-            assetType: 'plant',
-            assetId: 'cube'
-        },
-        {
-            title: 'red cube',
-            assetType: 'plant',
-            assetId: 'redcube'
-        },
-    ]
+    const plants = listAssetDefinitions("plant")
 
     return(
         <div className={'grid grid-cols-2 gap-2 m-1'}>
             {
-                t.map((t, index) => {
+                plants.map((asset) => {
                     return (
                         <Tile
-                            key={index}
-                            title={t.title}
-                            assetType={t.assetType}
-                            assetId={t.assetId}
+                            key={asset.id}
+                            asset={asset}
                             className='w-full'/>
                     )
                 })
